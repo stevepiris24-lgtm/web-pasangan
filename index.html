@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Untuk Lila ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- =========================
+             HERO
+        ========================== -->
+
+        <section class="hero">
+
+            <div class="hero-text">
+
+                <div class="lila-text">
+                    Untuk Lila ♡
+                </div>
+
+                <h1 id="dynamicText">
+                    Setiap hari bersamamu adalah rumah.
+                </h1>
+
+                <p id="timer">
+                    Sejak 24 April 2024 — sudah 0 hari bersama ❤️
+                </p>
+
+            </div>
+
+
+            <div class="hero-img">
+
+                <img src="assets/images/foto.jpg" alt="Foto kita">
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CARDS
+        ========================== -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">
+                    ⏳
+                </div>
+
+                <h3>Jam Terbang</h3>
+
+                <p id="jam">
+                    0 jam bersama
+                </p>
+
+                <small>
+                    Sejak kita bersama
+                </small>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🎵
+                </div>
+
+                <h3>Playlist</h3>
+
+                <p>
+                    Lagu-lagu kita
+                </p>
+
+                <a href="#" class="playlist-link">
+                    Buka Playlist
+                </a>
+
+            </div>
+
+
+            <div class="card quote-card">
+
+                <div class="quote">
+                    “
+                </div>
+
+                <p>
+                    Setiap hari bersamamu
+                    adalah rumah.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             TIMELINE HEADER
+        ========================== -->
+
+        <section class="timeline-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        <span>♥</span>
+                        Timeline Cerita Kita
+                    </h2>
+
+                    <p>
+                        Kumpulan momen yang ingin selalu kita ingat.
+                    </p>
+
+                </div>
+
+
+                <div class="section-actions">
+
+                    <button
+                        class="gallery-btn"
+                        onclick="scrollToGallery()">
+
+                        Galeri Foto
+
+                    </button>
+
+
+                    <button
+                        class="add-btn"
+                        id="openAddButton"
+                        onclick="openAddForm()">
+
+                        + Tambah Kenangan
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 ADMIN LOGIN
+            ========================== -->
+
+            <div
+                class="login-box"
+                id="loginBox">
+
+                <div class="login-title">
+                    🔐 Admin
+                </div>
+
+                <p>
+                    Login untuk menambah atau menghapus kenangan.
+                </p>
+
+
+                <input
+                    type="email"
+                    id="adminEmail"
+                    placeholder="Email admin">
+
+
+                <input
+                    type="password"
+                    id="adminPassword"
+                    placeholder="Password">
+
+
+                <button
+                    onclick="loginAdmin()">
+
+                    Login
+
+                </button>
+
+
+                <div
+                    id="loginMessage"
+                    class="login-message">
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 ADMIN PANEL
+            ========================== -->
+
+            <div
+                class="admin-panel"
+                id="adminPanel">
+
+                <div>
+
+                    <strong>
+                        🔓 Mode Admin aktif
+                    </strong>
+
+                    <span id="adminEmailText"></span>
+
+                </div>
+
+
+                <button onclick="logoutAdmin()">
+                    Logout
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 FORM TAMBAH
+            ========================== -->
+
+            <div
+                class="add-form"
+                id="addForm">
+
+                <div class="form-title">
+                    Tambah Kenangan ❤️
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Judul
+                        </label>
+
+                        <input
+                            type="text"
+                            id="judul"
+                            placeholder="Contoh: Pertama Ketemu">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Tanggal
+                        </label>
+
+                        <input
+                            type="date"
+                            id="tanggal">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Lokasi
+                        </label>
+
+                        <input
+                            type="text"
+                            id="lokasi"
+                            placeholder="Contoh: Ambon">
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Cerita
+                        </label>
+
+                        <textarea
+                            id="cerita"
+                            placeholder="Ceritakan momen ini..."
+                            rows="4"></textarea>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Foto
+                        </label>
+
+                        <input
+                            type="file"
+                            id="foto"
+                            accept="image/*">
+
+                        <small>
+                            Maksimal 6 MB untuk upload standar.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        class="cancel-btn"
+                        onclick="closeAddForm()">
+
+                        Batal
+
+                    </button>
+
+
+                    <button
+                        class="save-btn"
+                        onclick="tambahKenangan()">
+
+                        Simpan Kenangan ❤️
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="formMessage"
+                    class="form-message">
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 GALLERY
+            ========================== -->
+
+            <div
+                class="timeline-gallery"
+                id="timelineList">
+
+                <div class="loading">
+                    Memuat cerita kita...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FOOTER
+        ========================== -->
+
+        <footer>
+
+            <p>
+                Dibuat dengan ❤️ untuk Lila
+            </p>
+
+            <small>
+                Our little story, forever.
+            </small>
+
+        </footer>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
