@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
 
 
-/* =========================================
+/* =========================================================
    GLOBAL
-========================================= */
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -15,6 +15,7 @@ html {
 
 body {
     margin: 0;
+
     background:
         radial-gradient(
             circle at top right,
@@ -28,6 +29,8 @@ body {
     font-family: 'Poppins', sans-serif;
 
     min-height: 100vh;
+
+    overflow-x: hidden;
 }
 
 
@@ -37,11 +40,18 @@ textarea {
     font-family: inherit;
 }
 
-
 button {
     cursor: pointer;
 }
 
+img {
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
 
 .container {
     width: 100%;
@@ -56,12 +66,11 @@ button {
 }
 
 
-/* =========================================
+/* =========================================================
    HERO
-========================================= */
+========================================================= */
 
 .hero {
-
     display: flex;
 
     align-items: center;
@@ -80,7 +89,6 @@ button {
 
 
 .lila-text {
-
     font-family: 'Great Vibes', cursive;
 
     font-size: 58px;
@@ -98,7 +106,6 @@ button {
         );
 
     -webkit-background-clip: text;
-
     -webkit-text-fill-color: transparent;
 
     text-shadow:
@@ -107,7 +114,6 @@ button {
 
 
 .hero-text h1 {
-
     margin: 0;
 
     max-width: 560px;
@@ -128,7 +134,6 @@ button {
 
 
 #timer {
-
     margin-top: 22px;
 
     color: #aaa;
@@ -138,7 +143,6 @@ button {
 
 
 .hero-img {
-
     flex-shrink: 0;
 
     width: 290px;
@@ -150,7 +154,6 @@ button {
 
 
 .hero-img::before {
-
     content: "";
 
     position: absolute;
@@ -167,7 +170,6 @@ button {
 
 
 .hero-img img {
-
     width: 100%;
 
     height: 100%;
@@ -188,12 +190,11 @@ button {
 }
 
 
-/* =========================================
+/* =========================================================
    CARDS
-========================================= */
+========================================================= */
 
 .cards {
-
     display: grid;
 
     grid-template-columns:
@@ -206,7 +207,6 @@ button {
 
 
 .card {
-
     position: relative;
 
     background:
@@ -216,7 +216,8 @@ button {
             rgba(20, 20, 23, 0.95)
         );
 
-    border: 1px solid
+    border:
+        1px solid
         rgba(255,255,255,0.06);
 
     padding: 24px;
@@ -232,7 +233,6 @@ button {
 
 
 .card:hover {
-
     transform:
         translateY(-5px);
 
@@ -242,7 +242,6 @@ button {
 
 
 .card-icon {
-
     font-size: 22px;
 
     margin-bottom: 10px;
@@ -250,7 +249,6 @@ button {
 
 
 .card h3 {
-
     margin:
         0 0 8px;
 
@@ -263,7 +261,6 @@ button {
 
 
 .card p {
-
     margin: 0 0 7px;
 
     color: #ddd;
@@ -273,7 +270,6 @@ button {
 
 
 .card small {
-
     color: #777;
 
     font-size: 11px;
@@ -281,7 +277,6 @@ button {
 
 
 .playlist-link {
-
     display: inline-block;
 
     margin-top: 8px;
@@ -295,7 +290,6 @@ button {
 
 
 .quote-card {
-
     display: flex;
 
     flex-direction: column;
@@ -305,7 +299,6 @@ button {
 
 
 .quote {
-
     font-family:
         'Playfair Display',
         serif;
@@ -318,18 +311,16 @@ button {
 }
 
 
-/* =========================================
-   TIMELINE
-========================================= */
+/* =========================================================
+   TIMELINE SECTION
+========================================================= */
 
 .timeline-section {
-
     margin-top: 90px;
 }
 
 
 .section-header {
-
     display: flex;
 
     align-items: flex-end;
@@ -343,7 +334,6 @@ button {
 
 
 .section-header h2 {
-
     margin: 0;
 
     font-family:
@@ -355,7 +345,6 @@ button {
 
 
 .section-header h2 span {
-
     color: #ff8fa8;
 
     font-size: 22px;
@@ -365,7 +354,6 @@ button {
 
 
 .section-header p {
-
     margin:
         8px 0 0;
 
@@ -376,7 +364,6 @@ button {
 
 
 .section-actions {
-
     display: flex;
 
     align-items: center;
@@ -387,7 +374,6 @@ button {
 
 .gallery-btn,
 .add-btn {
-
     border-radius: 10px;
 
     padding:
@@ -401,8 +387,9 @@ button {
 
 
 .gallery-btn {
-
-    border: 1px solid transparent;
+    border:
+        1px solid
+        transparent;
 
     background: transparent;
 
@@ -411,14 +398,12 @@ button {
 
 
 .gallery-btn:hover {
-
     background:
         rgba(255, 141, 161, 0.08);
 }
 
 
 .add-btn {
-
     border:
         1px solid
         rgba(255, 141, 161, 0.6);
@@ -431,18 +416,19 @@ button {
 
 
 .add-btn:hover {
-
     background:
         rgba(255, 141, 161, 0.15);
+
+    transform:
+        translateY(-1px);
 }
 
 
-/* =========================================
+/* =========================================================
    LOGIN
-========================================= */
+========================================================= */
 
 .login-box {
-
     display: none;
 
     max-width: 420px;
@@ -465,13 +451,11 @@ button {
 
 
 .login-box.show {
-
     display: block;
 }
 
 
 .login-title {
-
     font-family:
         'Playfair Display',
         serif;
@@ -483,7 +467,6 @@ button {
 
 
 .login-box p {
-
     color: #777;
 
     font-size: 12px;
@@ -494,7 +477,6 @@ button {
 
 
 .login-box input {
-
     width: 100%;
 
     margin-bottom: 10px;
@@ -516,14 +498,12 @@ button {
 
 
 .login-box input:focus {
-
     border-color:
         #ff8fa8;
 }
 
 
 .login-box > button {
-
     width: 100%;
 
     border: none;
@@ -540,11 +520,22 @@ button {
         );
 
     color: white;
+
+    transition: .3s;
+}
+
+
+.login-box > button:hover {
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 8px 25px
+        rgba(255, 111, 145, .2);
 }
 
 
 .login-message {
-
     margin-top: 10px;
 
     font-size: 12px;
@@ -553,12 +544,11 @@ button {
 }
 
 
-/* =========================================
+/* =========================================================
    ADMIN PANEL
-========================================= */
+========================================================= */
 
 .admin-panel {
-
     display: none;
 
     align-items: center;
@@ -587,19 +577,16 @@ button {
 
 
 .admin-panel.show {
-
     display: flex;
 }
 
 
 .admin-panel strong {
-
     color: #ff9bad;
 }
 
 
 .admin-panel span {
-
     color: #777;
 
     margin-left: 8px;
@@ -607,7 +594,6 @@ button {
 
 
 .admin-panel button {
-
     border: none;
 
     background: transparent;
@@ -616,12 +602,16 @@ button {
 }
 
 
-/* =========================================
-   ADD FORM
-========================================= */
+.admin-panel button:hover {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   ADD ALBUM FORM
+========================================================= */
 
 .add-form {
-
     display: none;
 
     padding: 25px;
@@ -644,27 +634,58 @@ button {
 
 
 .add-form.show {
-
     display: block;
+
+    animation:
+        formAppear .3s ease;
+}
+
+
+@keyframes formAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
 }
 
 
 .form-title {
-
     font-family:
         'Playfair Display',
         serif;
 
     font-size: 23px;
 
-    margin-bottom: 20px;
+    margin-bottom: 8px;
 
     color: #ff9bad;
 }
 
 
-.form-grid {
+.form-description {
+    margin:
+        0 0 22px;
 
+    color: #777;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+.form-grid {
     display: grid;
 
     grid-template-columns:
@@ -675,7 +696,6 @@ button {
 
 
 .form-group {
-
     display: flex;
 
     flex-direction: column;
@@ -685,14 +705,12 @@ button {
 
 
 .form-group.full {
-
     grid-column:
         1 / -1;
 }
 
 
 .form-group label {
-
     font-size: 12px;
 
     color: #aaa;
@@ -701,7 +719,6 @@ button {
 
 .form-group input,
 .form-group textarea {
-
     width: 100%;
 
     border:
@@ -727,14 +744,41 @@ button {
 
 .form-group input:focus,
 .form-group textarea:focus {
-
     border-color:
         #ff8fa8;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(255,143,168,.06);
+}
+
+
+.form-group input[type="file"] {
+    padding: 9px;
+}
+
+
+.form-group input[type="file"]::file-selector-button {
+    border: none;
+
+    padding:
+        7px
+        10px;
+
+    margin-right: 8px;
+
+    border-radius: 6px;
+
+    background:
+        rgba(255,143,168,.12);
+
+    color: #ff9bad;
+
+    cursor: pointer;
 }
 
 
 .form-group small {
-
     color: #666;
 
     font-size: 10px;
@@ -742,7 +786,6 @@ button {
 
 
 .form-actions {
-
     display: flex;
 
     justify-content: flex-end;
@@ -755,7 +798,6 @@ button {
 
 .cancel-btn,
 .save-btn {
-
     padding:
         11px
         16px;
@@ -767,7 +809,6 @@ button {
 
 
 .cancel-btn {
-
     border:
         1px solid
         #333;
@@ -779,8 +820,15 @@ button {
 }
 
 
-.save-btn {
+.cancel-btn:hover {
+    border-color:
+        #555;
 
+    color: white;
+}
+
+
+.save-btn {
     border: none;
 
     color: white;
@@ -794,8 +842,17 @@ button {
 }
 
 
-.form-message {
+.save-btn:hover {
+    transform:
+        translateY(-1px);
 
+    box-shadow:
+        0 8px 25px
+        rgba(255,111,145,.18);
+}
+
+
+.form-message {
     margin-top: 12px;
 
     font-size: 12px;
@@ -804,65 +861,41 @@ button {
 }
 
 
-/* =========================================
-   GALLERY
-========================================= */
+/* =========================================================
+   ALBUM GRID
+   IMPORTANT:
+   Tidak lagi menggunakan flex horizontal.
+========================================================= */
 
 .timeline-gallery {
+    display: grid;
 
-    display: flex;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
 
-    gap: 18px;
+    gap: 20px;
 
-    overflow-x: auto;
+    width: 100%;
 
     padding:
-        10px
         5px
-        25px;
+        2px
+        20px;
 
-    scroll-snap-type: x mandatory;
-
-    scrollbar-width: thin;
-
-    scrollbar-color:
-        #ff8fa8
-        #171719;
+    overflow: visible;
 }
 
 
-.timeline-gallery::-webkit-scrollbar {
-
-    height: 6px;
-}
-
-
-.timeline-gallery::-webkit-scrollbar-track {
-
-    background:
-        #151518;
-
-    border-radius: 10px;
-}
-
-
-.timeline-gallery::-webkit-scrollbar-thumb {
-
-    background:
-        #ff8fa8;
-
-    border-radius: 10px;
-}
-
+/* =========================================================
+   ALBUM CARD
+========================================================= */
 
 .timeline-card {
-
-    flex:
-        0 0 235px;
-
-    scroll-snap-align: start;
-
     position: relative;
+
+    width: 100%;
+
+    min-width: 0;
 
     background:
         linear-gradient(
@@ -875,31 +908,40 @@ button {
         1px solid
         rgba(255,255,255,0.06);
 
-    border-radius: 17px;
+    border-radius: 18px;
 
     overflow: hidden;
 
     transition:
         transform .3s ease,
-        border-color .3s ease;
+        border-color .3s ease,
+        box-shadow .3s ease;
+
+    cursor: pointer;
 }
 
 
 .timeline-card:hover {
-
     transform:
         translateY(-6px);
 
     border-color:
         rgba(255,141,161,0.3);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,.25);
 }
 
 
-.timeline-photo {
+/* =========================================================
+   ALBUM COVER
+========================================================= */
 
+.timeline-photo {
     width: 100%;
 
-    height: 210px;
+    height: 235px;
 
     object-fit: cover;
 
@@ -907,17 +949,28 @@ button {
 
     background:
         #222;
+
+    transition:
+        transform .5s ease;
 }
 
 
-.timeline-content {
+.timeline-card:hover .timeline-photo {
+    transform:
+        scale(1.04);
+}
 
-    padding: 17px;
+
+/* =========================================================
+   ALBUM CONTENT
+========================================================= */
+
+.timeline-content {
+    padding: 18px;
 }
 
 
 .timeline-date {
-
     display: inline-block;
 
     padding:
@@ -941,7 +994,6 @@ button {
 
 
 .timeline-card h3 {
-
     margin:
         0 0 7px;
 
@@ -949,12 +1001,13 @@ button {
         'Playfair Display',
         serif;
 
-    font-size: 19px;
+    font-size: 20px;
+
+    line-height: 1.3;
 }
 
 
 .timeline-location {
-
     margin-bottom: 10px;
 
     color: #888;
@@ -964,7 +1017,6 @@ button {
 
 
 .timeline-story {
-
     margin: 0;
 
     color: #b8b8bc;
@@ -972,16 +1024,23 @@ button {
     font-size: 12px;
 
     line-height: 1.7;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 3;
+
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
 }
 
 
 .timeline-heart {
-
     position: absolute;
 
-    right: 14px;
+    right: 16px;
 
-    bottom: 14px;
+    bottom: 16px;
 
     color:
         #ff8fa8;
@@ -990,13 +1049,509 @@ button {
 }
 
 
+/* =========================================================
+   DELETE ALBUM BUTTON
+========================================================= */
+
 .delete-card-btn {
+    position: absolute;
+
+    top: 12px;
+
+    right: 12px;
+
+    z-index: 10;
+
+    width: 32px;
+
+    height: 32px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(0,0,0,.72);
+
+    color:
+        #ff9bad;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    backdrop-filter:
+        blur(5px);
+
+    transition: .2s;
+}
+
+
+.delete-card-btn:hover {
+    background:
+        #ff6f91;
+
+    color: white;
+
+    transform:
+        scale(1.08);
+}
+
+
+.admin-active .delete-card-btn {
+    display: flex;
+}
+
+
+/* =========================================================
+   ALBUM VIEWER
+========================================================= */
+
+.album-viewer {
+    width: 100%;
+
+    margin-top: 30px;
+
+    padding: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151518,
+            #101012
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 25px 60px
+        rgba(0,0,0,.25);
+
+    animation:
+        albumAppear .35s ease;
+}
+
+
+@keyframes albumAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   ALBUM VIEWER HEADER
+========================================================= */
+
+.album-viewer-header {
+    display: grid;
+
+    grid-template-columns:
+        auto 1fr auto;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding-bottom: 20px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+}
+
+
+.album-viewer-header h2 {
+    margin: 0;
+
+    font-family:
+        'Playfair Display',
+        serif;
+
+    font-size: 28px;
+
+    color: #fff;
+}
+
+
+.album-viewer-header p {
+    margin:
+        5px 0 0;
+
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ALBUM NAV BUTTONS
+========================================================= */
+
+.back-album-btn,
+.close-album-btn {
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    background:
+        rgba(255,255,255,.03);
+
+    color: #aaa;
+
+    border-radius: 9px;
+
+    padding:
+        9px
+        13px;
+
+    font-size: 12px;
+
+    transition: .25s;
+}
+
+
+.back-album-btn:hover,
+.close-album-btn:hover {
+    border-color:
+        rgba(255,141,161,.4);
+
+    color:
+        #ff9bad;
+
+    background:
+        rgba(255,141,161,.06);
+}
+
+
+.close-album-btn {
+    width: 38px;
+
+    height: 38px;
+
+    padding: 0;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   ALBUM STORY
+========================================================= */
+
+.album-story {
+    margin:
+        22px
+        0;
+
+    padding:
+        18px
+        20px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border-left:
+        2px solid
+        #ff8fa8;
+
+    border-radius:
+        0
+        10px
+        10px
+        0;
+
+    color: #bcbcc0;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    white-space: pre-line;
+}
+
+
+/* =========================================================
+   ADMIN ACTIONS DALAM ALBUM
+========================================================= */
+
+.album-admin-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,141,161,.045);
+
+    border:
+        1px solid
+        rgba(255,141,161,.1);
+}
+
+
+.add-photo-btn,
+.delete-album-btn {
+    padding:
+        10px
+        14px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+
+    transition: .25s;
+}
+
+
+.add-photo-btn {
+    border:
+        1px solid
+        rgba(255,141,161,.45);
+
+    background:
+        rgba(255,141,161,.08);
+
+    color:
+        #ff9bad;
+}
+
+
+.add-photo-btn:hover {
+    background:
+        rgba(255,141,161,.16);
+}
+
+
+.delete-album-btn {
+    border:
+        1px solid
+        rgba(255,80,110,.25);
+
+    background:
+        rgba(255,80,110,.05);
+
+    color:
+        #ff879f;
+}
+
+
+.delete-album-btn:hover {
+    background:
+        rgba(255,80,110,.12);
+}
+
+
+/* =========================================================
+   PHOTO UPLOAD BOX
+========================================================= */
+
+.photo-upload-box {
+    margin-bottom: 25px;
+
+    padding: 20px;
+
+    border:
+        1px dashed
+        rgba(255,141,161,.3);
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,141,161,.025);
+}
+
+
+.photo-upload-box h3 {
+    margin:
+        0 0 12px;
+
+    font-family:
+        'Playfair Display',
+        serif;
+
+    font-size: 20px;
+
+    color: #ff9bad;
+}
+
+
+.photo-upload-box input[type="file"] {
+    width: 100%;
+
+    padding: 12px;
+
+    border:
+        1px solid
+        #2b2b30;
+
+    background:
+        #0e0e10;
+
+    color: #aaa;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+}
+
+
+.photo-upload-box input[type="file"]::file-selector-button {
+    border: none;
+
+    padding:
+        8px
+        12px;
+
+    margin-right: 10px;
+
+    border-radius: 7px;
+
+    background:
+        rgba(255,143,168,.12);
+
+    color:
+        #ff9bad;
+
+    cursor: pointer;
+}
+
+
+.photo-upload-box > small {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #666;
+
+    font-size: 10px;
+}
+
+
+.photo-upload-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+
+/* =========================================================
+   ALBUM PHOTO GRID
+========================================================= */
+
+.album-photo-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+
+.album-photo-item {
+    position: relative;
+
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    border-radius: 13px;
+
+    background:
+        #1b1b1e;
+
+    border:
+        1px solid
+        rgba(255,255,255,.05);
+
+    cursor: pointer;
+}
+
+
+.album-photo-item img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform .4s ease;
+}
+
+
+.album-photo-item:hover img {
+    transform:
+        scale(1.07);
+}
+
+
+.album-photo-item::after {
+    content: "";
 
     position: absolute;
 
-    top: 10px;
+    inset: 0;
 
-    right: 10px;
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.25),
+            transparent 40%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   DELETE PHOTO BUTTON
+========================================================= */
+
+.delete-photo-btn {
+    position: absolute;
+
+    top: 8px;
+
+    right: 8px;
+
+    z-index: 5;
 
     width: 30px;
 
@@ -1007,7 +1562,7 @@ button {
     border-radius: 50%;
 
     background:
-        rgba(0,0,0,.7);
+        rgba(0,0,0,.75);
 
     color:
         #ff9bad;
@@ -1017,17 +1572,129 @@ button {
     align-items: center;
 
     justify-content: center;
+
+    font-size: 13px;
 }
 
 
-.admin-active .delete-card-btn {
-
+.admin-active .delete-photo-btn {
     display: flex;
 }
 
 
-.loading {
+.delete-photo-btn:hover {
+    background:
+        #ff6f91;
 
+    color: white;
+}
+
+
+/* =========================================================
+   PHOTO CAPTION
+========================================================= */
+
+.photo-caption {
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    z-index: 3;
+
+    padding:
+        20px
+        10px
+        10px;
+
+    color: white;
+
+    font-size: 10px;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0,0,0,.7)
+        );
+}
+
+
+/* =========================================================
+   LIGHTBOX
+========================================================= */
+
+.photo-lightbox {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    background:
+        rgba(0,0,0,.92);
+
+    backdrop-filter:
+        blur(8px);
+}
+
+
+.photo-lightbox img {
+    max-width: 92vw;
+
+    max-height: 88vh;
+
+    object-fit: contain;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.6);
+}
+
+
+.photo-lightbox-close {
+    position: fixed;
+
+    top: 20px;
+
+    right: 25px;
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.1);
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading {
     width: 100%;
 
     text-align: center;
@@ -1037,11 +1704,17 @@ button {
     padding: 50px 20px;
 
     font-size: 13px;
+
+    grid-column:
+        1 / -1;
 }
 
 
-.empty-state {
+/* =========================================================
+   EMPTY STATE
+========================================================= */
 
+.empty-state {
     width: 100%;
 
     padding: 60px 20px;
@@ -1055,25 +1728,32 @@ button {
         #29292d;
 
     border-radius: 16px;
+
+    grid-column:
+        1 / -1;
 }
 
 
 .empty-state strong {
-
     display: block;
 
     margin-bottom: 8px;
 
     color: #aaa;
+
+    font-family:
+        'Playfair Display',
+        serif;
+
+    font-size: 18px;
 }
 
 
-/* =========================================
+/* =========================================================
    FOOTER
-========================================= */
+========================================================= */
 
 footer {
-
     margin-top: 80px;
 
     padding-top: 25px;
@@ -1087,7 +1767,6 @@ footer {
 
 
 footer p {
-
     margin: 0;
 
     color: #888;
@@ -1097,7 +1776,6 @@ footer p {
 
 
 footer small {
-
     display: block;
 
     margin-top: 7px;
@@ -1108,14 +1786,70 @@ footer small {
 }
 
 
-/* =========================================
-   MOBILE
-========================================= */
+/* =========================================================
+   TABLET
+========================================================= */
 
-@media (max-width: 800px) {
+@media (max-width: 950px) {
 
     .container {
+        padding:
+            35px
+            22px
+            45px;
+    }
 
+
+    .hero {
+        gap: 35px;
+    }
+
+
+    .hero-text h1 {
+        font-size: 39px;
+    }
+
+
+    .hero-img {
+        width: 250px;
+
+        height: 310px;
+    }
+
+
+    .cards {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .quote-card {
+        grid-column:
+            1 / -1;
+    }
+
+
+    .timeline-gallery {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .album-photo-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .container {
         padding:
             30px
             18px
@@ -1123,50 +1857,56 @@ footer small {
     }
 
 
-    .hero {
+    /* HERO */
 
+    .hero {
         flex-direction: column;
 
         text-align: center;
 
         gap: 35px;
+
+        min-height: auto;
     }
 
 
     .hero-text {
-
         max-width: 100%;
     }
 
 
     .lila-text {
-
         font-size: 48px;
     }
 
 
     .hero-text h1 {
-
         font-size: 34px;
     }
 
 
     .hero-img {
-
         width: 230px;
 
         height: 280px;
     }
 
 
-    .cards {
+    /* CARDS */
 
+    .cards {
         grid-template-columns: 1fr;
     }
 
 
-    .section-header {
+    .quote-card {
+        grid-column: auto;
+    }
 
+
+    /* SECTION */
+
+    .section-header {
         align-items: flex-start;
 
         flex-direction: column;
@@ -1174,60 +1914,155 @@ footer small {
 
 
     .section-actions {
-
         width: 100%;
     }
 
 
     .gallery-btn,
     .add-btn {
-
         flex: 1;
     }
 
 
-    .form-grid {
+    /* FORM */
 
+    .form-grid {
         grid-template-columns: 1fr;
     }
 
 
     .form-group.full {
-
         grid-column: auto;
     }
 
 
-    .timeline-card {
+    /* ALBUM */
 
-        flex-basis: 250px;
+    .timeline-gallery {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+
+    .timeline-photo {
+        height: 250px;
+    }
+
+
+    /* ALBUM VIEWER */
+
+    .album-viewer {
+        padding: 18px;
+    }
+
+
+    .album-viewer-header {
+        grid-template-columns:
+            auto 1fr;
+
+        gap: 12px;
+    }
+
+
+    .album-viewer-header .close-album-btn {
+        grid-column: 2;
+
+        grid-row: 1;
+
+        justify-self: end;
+    }
+
+
+    .album-viewer-header h2 {
+        font-size: 23px;
+    }
+
+
+    .album-viewer-header p {
+        font-size: 11px;
+    }
+
+
+    .album-admin-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .add-photo-btn,
+    .delete-album-btn {
+        width: 100%;
+    }
+
+
+    .album-photo-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 9px;
+    }
+
+
+    /* ADMIN */
+
+    .admin-panel {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .photo-upload-actions {
+        flex-direction: column-reverse;
+    }
+
+
+    .photo-upload-actions button {
+        width: 100%;
     }
 
 }
 
 
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
 @media (max-width: 480px) {
 
-    .hero-text h1 {
+    .container {
+        padding:
+            25px
+            14px
+            35px;
+    }
 
+
+    .hero-text h1 {
         font-size: 29px;
     }
 
 
     .lila-text {
-
         font-size: 43px;
     }
 
 
-    .section-header h2 {
+    .hero-img {
+        width: 210px;
 
+        height: 260px;
+    }
+
+
+    .section-header h2 {
         font-size: 25px;
     }
 
 
     .section-actions {
-
         flex-direction: column;
 
         align-items: stretch;
@@ -1236,16 +2071,85 @@ footer small {
 
     .gallery-btn,
     .add-btn {
+        width: 100%;
+    }
+
+
+    .add-form {
+        padding: 18px;
+    }
+
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+
+    .form-actions button {
+        width: 100%;
+    }
+
+
+    .timeline-photo {
+        height: 220px;
+    }
+
+
+    .album-viewer {
+        padding: 14px;
+    }
+
+
+    .album-viewer-header {
+        grid-template-columns:
+            1fr auto;
+    }
+
+
+    .back-album-btn {
+        grid-column:
+            1 / -1;
 
         width: 100%;
     }
 
 
-    .admin-panel {
+    .album-viewer-header h2 {
+        font-size: 21px;
+    }
 
-        align-items: flex-start;
 
-        flex-direction: column;
+    .album-story {
+        padding:
+            15px;
+
+        font-size: 12px;
+    }
+
+
+    .album-photo-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL SCREEN
+========================================================= */
+
+@media (max-width: 350px) {
+
+    .album-photo-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .hero-img {
+        width: 190px;
+
+        height: 235px;
     }
 
 }

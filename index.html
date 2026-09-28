@@ -11,317 +11,541 @@
 
     <!-- SUPABASE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- =========================
-             HERO
-        ========================== -->
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
 
-        <section class="hero">
+    <section class="hero">
 
-            <div class="hero-text">
+        <div class="hero-text">
 
-                <div class="lila-text">
-                    Untuk Lila ♡
-                </div>
-
-                <h1 id="dynamicText">
-                    Setiap hari bersamamu adalah rumah.
-                </h1>
-
-                <p id="timer">
-                    Sejak 24 April 2024 — sudah 0 hari bersama ❤️
-                </p>
-
+            <div class="lila-text">
+                Untuk Lila ♡
             </div>
 
+            <h1 id="dynamicText">
+                Setiap hari bersamamu adalah rumah.
+            </h1>
 
-            <div class="hero-img">
+            <p id="timer">
+                Sejak 24 April 2024 — sudah 0 hari bersama ❤️
+            </p>
 
-                <img src="assets/images/foto.jpg" alt="Foto kita">
+        </div>
 
+
+        <div class="hero-img">
+
+            <img
+                src="assets/images/foto.jpg"
+                alt="Foto kita">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CARDS
+    ====================================================== -->
+
+    <section class="cards">
+
+        <!-- JAM TERBANG -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                ⏳
             </div>
 
-        </section>
+            <h3>
+                Jam Terbang
+            </h3>
+
+            <p id="jam">
+                0 jam bersama
+            </p>
+
+            <small>
+                Sejak kita bersama
+            </small>
+
+        </div>
 
 
-        <!-- =========================
-             CARDS
-        ========================== -->
+        <!-- PLAYLIST -->
 
-        <section class="cards">
+        <div class="card">
 
-            <div class="card">
-
-                <div class="card-icon">
-                    ⏳
-                </div>
-
-                <h3>Jam Terbang</h3>
-
-                <p id="jam">
-                    0 jam bersama
-                </p>
-
-                <small>
-                    Sejak kita bersama
-                </small>
-
+            <div class="card-icon">
+                🎵
             </div>
 
+            <h3>
+                Playlist
+            </h3>
 
-            <div class="card">
+            <p>
+                Lagu-lagu kita
+            </p>
 
-                <div class="card-icon">
-                    🎵
-                </div>
+            <a
+                href="#"
+                class="playlist-link">
 
-                <h3>Playlist</h3>
+                Buka Playlist
+
+            </a>
+
+        </div>
+
+
+        <!-- QUOTE -->
+
+        <div class="card quote-card">
+
+            <div class="quote">
+                “
+            </div>
+
+            <p>
+                Setiap hari bersamamu
+                adalah rumah.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         TIMELINE
+    ====================================================== -->
+
+    <section class="timeline-section">
+
+
+        <!-- HEADER -->
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>
+
+                    <span>
+                        ♥
+                    </span>
+
+                    Timeline Cerita Kita
+
+                </h2>
 
                 <p>
-                    Lagu-lagu kita
+                    Kumpulan album dan momen yang ingin
+                    selalu kita ingat.
                 </p>
-
-                <a href="#" class="playlist-link">
-                    Buka Playlist
-                </a>
 
             </div>
 
 
-            <div class="card quote-card">
+            <!-- ACTION -->
 
-                <div class="quote">
-                    “
+            <div class="section-actions">
+
+                <button
+                    class="gallery-btn"
+                    onclick="scrollToGallery()">
+
+                    📷 Galeri Foto
+
+                </button>
+
+
+                <button
+                    class="add-btn"
+                    id="openAddButton"
+                    onclick="openAddForm()">
+
+                    + Buat Album Baru
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             LOGIN ADMIN
+        ================================================== -->
+
+        <div
+            class="login-box"
+            id="loginBox">
+
+            <div class="login-title">
+                🔐 Admin
+            </div>
+
+            <p>
+                Login untuk membuat album,
+                menambahkan foto, dan mengelola cerita.
+            </p>
+
+
+            <input
+                type="email"
+                id="adminEmail"
+                placeholder="Email admin"
+                autocomplete="email">
+
+
+            <input
+                type="password"
+                id="adminPassword"
+                placeholder="Password admin"
+                autocomplete="current-password">
+
+
+            <button
+                onclick="loginAdmin()">
+
+                Login
+
+            </button>
+
+
+            <div
+                id="loginMessage"
+                class="login-message">
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ADMIN PANEL
+        ================================================== -->
+
+        <div
+            class="admin-panel"
+            id="adminPanel">
+
+            <div>
+
+                <strong>
+                    🔓 Mode Admin aktif
+                </strong>
+
+                <span id="adminEmailText">
+                </span>
+
+            </div>
+
+
+            <button
+                onclick="logoutAdmin()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FORM BUAT ALBUM
+        ================================================== -->
+
+        <div
+            class="add-form"
+            id="addForm">
+
+            <div class="form-title">
+
+                📁 Buat Album Cerita ❤️
+
+            </div>
+
+
+            <p class="form-description">
+
+                Buat satu album untuk menyimpan
+                beberapa foto dalam satu cerita.
+
+            </p>
+
+
+            <div class="form-grid">
+
+
+                <!-- JUDUL ALBUM -->
+
+                <div class="form-group">
+
+                    <label>
+                        Nama Album
+                    </label>
+
+                    <input
+                        type="text"
+                        id="judul"
+                        placeholder="Contoh: Our First Trip">
+
                 </div>
 
-                <p>
-                    Setiap hari bersamamu
-                    adalah rumah.
-                </p>
+
+
+                <!-- TANGGAL -->
+
+                <div class="form-group">
+
+                    <label>
+                        Tanggal
+                    </label>
+
+                    <input
+                        type="date"
+                        id="tanggal">
+
+                </div>
+
+
+
+                <!-- LOKASI -->
+
+                <div class="form-group">
+
+                    <label>
+                        Lokasi
+                    </label>
+
+                    <input
+                        type="text"
+                        id="lokasi"
+                        placeholder="Contoh: Kairatu Beach">
+
+                </div>
+
+
+
+                <!-- COVER -->
+
+                <div class="form-group">
+
+                    <label>
+                        Foto Cover
+                    </label>
+
+                    <input
+                        type="file"
+                        id="foto"
+                        accept="image/*">
+
+                    <small>
+                        Foto ini akan digunakan sebagai
+                        cover album.
+                    </small>
+
+                </div>
+
+
+
+                <!-- CERITA -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Cerita Album
+                    </label>
+
+                    <textarea
+                        id="cerita"
+                        placeholder="Ceritakan perjalanan atau kenangan dalam album ini..."
+                        rows="5"></textarea>
+
+                </div>
 
             </div>
 
-        </section>
 
 
-        <!-- =========================
-             TIMELINE HEADER
-        ========================== -->
+            <!-- ACTION FORM -->
 
-        <section class="timeline-section">
+            <div class="form-actions">
 
-            <div class="section-header">
+                <button
+                    class="cancel-btn"
+                    onclick="closeAddForm()">
+
+                    Batal
+
+                </button>
+
+
+                <button
+                    class="save-btn"
+                    onclick="tambahKenangan()">
+
+                    📁 Buat Album ❤️
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="formMessage"
+                class="form-message">
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ALBUM GALLERY
+        ================================================== -->
+
+        <div
+            class="timeline-gallery"
+            id="timelineList">
+
+            <div class="loading">
+
+                Memuat album cerita kita...
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ALBUM VIEWER
+        ================================================== -->
+
+        <div
+            class="album-viewer"
+            id="albumViewer"
+            style="display:none;">
+
+            <div class="album-viewer-header">
+
+                <button
+                    class="back-album-btn"
+                    onclick="closeAlbum()">
+
+                    ← Kembali
+
+                </button>
+
 
                 <div>
 
-                    <h2>
-                        <span>♥</span>
-                        Timeline Cerita Kita
+                    <h2 id="albumViewerTitle">
+                        Album
                     </h2>
 
-                    <p>
-                        Kumpulan momen yang ingin selalu kita ingat.
+                    <p id="albumViewerInfo">
                     </p>
 
                 </div>
 
 
-                <div class="section-actions">
+                <button
+                    class="close-album-btn"
+                    onclick="closeAlbum()">
 
-                    <button
-                        class="gallery-btn"
-                        onclick="scrollToGallery()">
+                    ✕
 
-                        Galeri Foto
-
-                    </button>
-
-
-                    <button
-                        class="add-btn"
-                        id="openAddButton"
-                        onclick="openAddForm()">
-
-                        + Tambah Kenangan
-
-                    </button>
-
-                </div>
+                </button>
 
             </div>
 
 
-            <!-- =========================
-                 ADMIN LOGIN
-            ========================== -->
+
+            <!-- CERITA ALBUM -->
 
             <div
-                class="login-box"
-                id="loginBox">
-
-                <div class="login-title">
-                    🔐 Admin
-                </div>
-
-                <p>
-                    Login untuk menambah atau menghapus kenangan.
-                </p>
+                class="album-story"
+                id="albumViewerStory">
+            </div>
 
 
-                <input
-                    type="email"
-                    id="adminEmail"
-                    placeholder="Email admin">
 
+            <!-- ADMIN: TAMBAH FOTO -->
 
-                <input
-                    type="password"
-                    id="adminPassword"
-                    placeholder="Password">
+            <div
+                class="album-admin-actions"
+                id="albumAdminActions"
+                style="display:none;">
+
+                <button
+                    class="add-photo-btn"
+                    onclick="openPhotoUpload()">
+
+                    + Tambah Foto ke Album
+
+                </button>
 
 
                 <button
-                    onclick="loginAdmin()">
+                    class="delete-album-btn"
+                    onclick="deleteCurrentAlbum()">
 
-                    Login
+                    🗑 Hapus Album
 
-                </button>
-
-
-                <div
-                    id="loginMessage"
-                    class="login-message">
-                </div>
-
-            </div>
-
-
-            <!-- =========================
-                 ADMIN PANEL
-            ========================== -->
-
-            <div
-                class="admin-panel"
-                id="adminPanel">
-
-                <div>
-
-                    <strong>
-                        🔓 Mode Admin aktif
-                    </strong>
-
-                    <span id="adminEmailText"></span>
-
-                </div>
-
-
-                <button onclick="logoutAdmin()">
-                    Logout
                 </button>
 
             </div>
 
 
-            <!-- =========================
-                 FORM TAMBAH
-            ========================== -->
+
+            <!-- FORM UPLOAD FOTO -->
 
             <div
-                class="add-form"
-                id="addForm">
+                class="photo-upload-box"
+                id="photoUploadBox"
+                style="display:none;">
 
-                <div class="form-title">
-                    Tambah Kenangan ❤️
-                </div>
-
-
-                <div class="form-grid">
-
-                    <div class="form-group">
-
-                        <label>
-                            Judul
-                        </label>
-
-                        <input
-                            type="text"
-                            id="judul"
-                            placeholder="Contoh: Pertama Ketemu">
-
-                    </div>
+                <h3>
+                    📷 Tambahkan Foto
+                </h3>
 
 
-                    <div class="form-group">
-
-                        <label>
-                            Tanggal
-                        </label>
-
-                        <input
-                            type="date"
-                            id="tanggal">
-
-                    </div>
+                <input
+                    type="file"
+                    id="albumPhotos"
+                    accept="image/*"
+                    multiple>
 
 
-                    <div class="form-group">
-
-                        <label>
-                            Lokasi
-                        </label>
-
-                        <input
-                            type="text"
-                            id="lokasi"
-                            placeholder="Contoh: Ambon">
-
-                    </div>
+                <small>
+                    Kamu bisa memilih beberapa foto
+                    sekaligus.
+                </small>
 
 
-                    <div class="form-group full">
-
-                        <label>
-                            Cerita
-                        </label>
-
-                        <textarea
-                            id="cerita"
-                            placeholder="Ceritakan momen ini..."
-                            rows="4"></textarea>
-
-                    </div>
-
-
-                    <div class="form-group full">
-
-                        <label>
-                            Foto
-                        </label>
-
-                        <input
-                            type="file"
-                            id="foto"
-                            accept="image/*">
-
-                        <small>
-                            Maksimal 6 MB untuk upload standar.
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-actions">
+                <div class="photo-upload-actions">
 
                     <button
-                        class="cancel-btn"
-                        onclick="closeAddForm()">
+                        onclick="closePhotoUpload()"
+                        class="cancel-btn">
 
                         Batal
 
@@ -329,10 +553,10 @@
 
 
                     <button
-                        class="save-btn"
-                        onclick="tambahKenangan()">
+                        onclick="uploadAlbumPhotos()"
+                        class="save-btn">
 
-                        Simpan Kenangan ❤️
+                        Upload Foto ❤️
 
                     </button>
 
@@ -340,52 +564,58 @@
 
 
                 <div
-                    id="formMessage"
+                    id="photoUploadMessage"
                     class="form-message">
                 </div>
 
             </div>
 
 
-            <!-- =========================
-                 GALLERY
-            ========================== -->
+
+            <!-- FOTO DALAM ALBUM -->
 
             <div
-                class="timeline-gallery"
-                id="timelineList">
+                class="album-photo-grid"
+                id="albumPhotoGrid">
 
                 <div class="loading">
-                    Memuat cerita kita...
+                    Memuat foto...
                 </div>
 
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 
-        <!-- =========================
-             FOOTER
-        ========================== -->
 
-        <footer>
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
 
-            <p>
-                Dibuat dengan ❤️ untuk Lila
-            </p>
+    <footer>
 
-            <small>
-                Our little story, forever.
-            </small>
+        <p>
+            Dibuat dengan ❤️ untuk Lila
+        </p>
 
-        </footer>
+        <small>
+            Our little story, forever.
+        </small>
 
-    </div>
+    </footer>
+
+</div>
 
 
-    <!-- JAVASCRIPT -->
-    <script src="script.js"></script>
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script src="script.js"></script>
+
 
 </body>
-
 </html>
