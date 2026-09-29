@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -11,51 +10,44 @@
 
     <title>Untuk Lila ❤️</title>
 
-    <!-- FONT -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
     <!-- CSS -->
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="./style.css">
 
     <!-- SUPABASE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 </head>
-
 
 <body>
 
-    <!-- =====================================================
-         BACKGROUND
-         ===================================================== -->
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
 
-    <div class="background-glow glow-one"></div>
-    <div class="background-glow glow-two"></div>
+<header class="navbar">
 
+    <div class="navbar-inner">
 
-    <!-- =====================================================
-         NAVBAR
-         ===================================================== -->
+        <a href="#" class="logo">
+            Untuk Lila <span>♡</span>
+        </a>
 
-    <header class="navbar">
-
-        <div class="brand">
-            Untuk Lila
-            <span>♡</span>
-        </div>
-
-        <div class="nav-right">
+        <div class="nav-actions">
 
             <button
-                id="loginButton"
+                id="adminButton"
                 class="nav-button"
                 onclick="openLoginModal()"
             >
@@ -72,574 +64,560 @@
 
         </div>
 
-    </header>
+    </div>
+
+</header>
 
 
-    <!-- =====================================================
-         HERO
-         ===================================================== -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-    <main>
+<main>
 
-        <section class="hero">
+<section class="hero">
 
-            <div class="hero-content">
+    <div class="hero-content">
 
-                <div class="script-title">
-                    Untuk Lila
-                    <span>♡</span>
-                </div>
+        <div class="hero-script">
+            Untuk Lila ♡
+        </div>
 
-                <h1
-                    id="changingText"
-                    class="hero-title"
-                >
-                    Setiap hari bersamamu adalah rumah.
-                </h1>
+        <h1 id="heroTitle">
+            Setiap hari bersamamu adalah rumah.
+        </h1>
 
-                <p class="hero-date">
-                    Sejak 24 April 2024
-                    <span>—</span>
-                    sudah
-                    <strong id="daysTogether">0</strong>
-                    hari bersama
-                    <span>♥</span>
-                </p>
+        <p class="hero-date">
+            Sejak 24 April 2024
+            —
+            sudah
+            <span id="daysTogether">0</span>
+            hari bersama
+            <span>♥</span>
+        </p>
 
-            </div>
+    </div>
 
 
-            <div class="hero-photo-wrapper">
+    <div class="hero-photo-wrapper">
 
-                <div class="photo-decoration"></div>
+        <div class="hero-photo-frame">
 
-                <img
-                    src="assets/foto-utama.jpg"
-                    alt="Foto kita"
-                    class="hero-photo"
-                >
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             INFO CARDS
-             ================================================= -->
-
-        <section class="info-grid">
-
-            <div class="info-card">
-
-                <div class="card-icon">
-                    ⏳
-                </div>
-
-                <h3>
-                    Jam Terbang
-                </h3>
-
-                <p id="hoursTogether">
-                    0 jam bersama ⏳
-                </p>
-
-                <small>
-                    Sejak kita bersama
-                </small>
-
-            </div>
-
-
-            <div class="info-card">
-
-                <div class="card-icon">
-                    🎵
-                </div>
-
-                <h3>
-                    Playlist
-                </h3>
-
-                <p>
-                    Lagu-lagu kita
-                </p>
-
-                <button
-                    class="text-button"
-                    onclick="showPlaylist()"
-                >
-                    Buka Playlist
-                </button>
-
-            </div>
-
-
-            <div class="info-card quote-card">
-
-                <div class="quote-mark">
-                    “
-                </div>
-
-                <p id="quoteText">
-                    Setiap hari bersamamu adalah rumah.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             TIMELINE
-             ================================================= -->
-
-        <section
-            id="timelineSection"
-            class="timeline-section"
-        >
-
-            <div class="section-heading">
-
-                <div>
-
-                    <span class="section-label">
-                        OUR STORY
-                    </span>
-
-                    <h2>
-                        Timeline Cerita Kita
-                    </h2>
-
-                    <p>
-                        Setiap album menyimpan satu cerita,
-                        dan setiap foto menyimpan kenangan.
-                    </p>
-
-                </div>
-
-
-                <button
-                    id="addAlbumButton"
-                    class="primary-button hidden"
-                    onclick="openAlbumForm()"
-                >
-                    + Buat Album
-                </button>
-
-            </div>
-
-
-            <!-- TIMELINE LIST -->
-
-            <div
-                id="timelineList"
-                class="timeline-list"
+            <img
+                id="heroPhoto"
+                src="./assets/foto-kita.jpg"
+                alt="Foto kita"
+                onerror="this.style.display='none'; document.getElementById('heroPhotoPlaceholder').style.display='flex';"
             >
 
-                <div class="loading-box">
-                    Memuat cerita kita...
-                </div>
-
+            <div
+                id="heroPhotoPlaceholder"
+                class="hero-photo-placeholder"
+            >
+                ❤️
             </div>
 
-        </section>
+        </div>
 
-    </main>
+    </div>
+
+</section>
 
 
-    <!-- =====================================================
-         ALBUM FORM MODAL
-         ===================================================== -->
+<!-- =====================================================
+     INFO CARDS
+===================================================== -->
 
-    <div
-        id="albumModal"
-        class="modal hidden"
-    >
+<section class="info-grid">
 
-        <div class="modal-overlay"
-             onclick="closeAlbumForm()">
+    <div class="info-card">
+
+        <div class="info-icon">
+            ⏳
+        </div>
+
+        <h3>
+            Jam Terbang
+        </h3>
+
+        <p>
+            <span id="hoursTogether">0</span>
+            jam bersama
+            ⏳
+        </p>
+
+        <small>
+            Sejak kita bersama
+        </small>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <div class="info-icon">
+            🎵
+        </div>
+
+        <h3>
+            Playlist
+        </h3>
+
+        <p>
+            Lagu-lagu kita
+        </p>
+
+        <a
+            href="#"
+            onclick="openPlaylist(event)"
+        >
+            Buka Playlist
+        </a>
+
+    </div>
+
+
+    <div class="info-card quote-card">
+
+        <div class="quote-icon">
+            “
+        </div>
+
+        <p>
+            Setiap hari bersamamu adalah rumah.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TIMELINE
+===================================================== -->
+
+<section class="timeline-section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                OUR STORY
+            </span>
+
+            <h2>
+                Timeline Cerita Kita
+            </h2>
+
+            <p>
+                Setiap cerita kecil kita,
+                tersimpan menjadi kenangan.
+            </p>
+
         </div>
 
 
-        <div class="modal-box large-modal">
+        <button
+            id="addAlbumButton"
+            class="primary-button hidden"
+            onclick="openAddAlbumModal()"
+        >
+            + Tambah Album
+        </button>
 
-            <button
-                class="modal-close"
-                onclick="closeAlbumForm()"
-            >
-                ×
-            </button>
+    </div>
 
 
-            <div class="modal-header">
+    <div id="timelineList" class="timeline-list">
 
-                <span class="section-label">
-                    MEMORY
-                </span>
+        <div class="loading">
+            Memuat cerita kita...
+        </div>
 
-                <h2>
-                    Buat Album Baru ❤️
-                </h2>
+    </div>
 
-                <p>
-                    Buat satu album untuk menyimpan
-                    beberapa foto dalam satu cerita.
-                </p>
+</section>
+
+</main>
+
+
+<!-- =====================================================
+     LOGIN MODAL
+===================================================== -->
+
+<div
+    id="loginModal"
+    class="modal hidden"
+>
+
+    <div class="modal-overlay" onclick="closeLoginModal()"></div>
+
+    <div class="modal-box small-modal">
+
+        <button
+            class="modal-close"
+            onclick="closeLoginModal()"
+        >
+            ×
+        </button>
+
+        <div class="modal-header">
+
+            <span class="modal-icon">
+                🔐
+            </span>
+
+            <h2>
+                Admin
+            </h2>
+
+            <p>
+                Masuk untuk mengelola album.
+            </p>
+
+        </div>
+
+
+        <form onsubmit="loginAdmin(event)">
+
+            <div class="form-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    id="loginEmail"
+                    type="email"
+                    placeholder="email@example.com"
+                    required
+                >
 
             </div>
 
 
-            <form
-                id="albumForm"
-                onsubmit="event.preventDefault(); createAlbum();"
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    id="loginPassword"
+                    type="password"
+                    placeholder="••••••••"
+                    required
+                >
+
+            </div>
+
+
+            <div
+                id="loginMessage"
+                class="form-message"
+            ></div>
+
+
+            <button
+                type="submit"
+                class="primary-button full-button"
             >
+                Masuk ❤️
+            </button>
 
-                <div class="form-grid">
+        </form>
 
-                    <div class="form-group">
+    </div>
 
-                        <label for="albumTitle">
-                            Nama Album
-                        </label>
-
-                        <input
-                            type="text"
-                            id="albumTitle"
-                            placeholder="Contoh: Hari Pertama Kita"
-                            required
-                        >
-
-                    </div>
+</div>
 
 
-                    <div class="form-group">
+<!-- =====================================================
+     ADD ALBUM MODAL
+===================================================== -->
 
-                        <label for="albumDate">
-                            Tanggal
-                        </label>
+<div
+    id="albumModal"
+    class="modal hidden"
+>
 
-                        <input
-                            type="date"
-                            id="albumDate"
-                            required
-                        >
+    <div
+        class="modal-overlay"
+        onclick="closeAddAlbumModal()"
+    ></div>
 
-                    </div>
+    <div class="modal-box large-modal">
 
-
-                    <div class="form-group">
-
-                        <label for="albumLocation">
-                            Lokasi
-                        </label>
-
-                        <input
-                            type="text"
-                            id="albumLocation"
-                            placeholder="Contoh: Ambon"
-                        >
-
-                    </div>
+        <button
+            class="modal-close"
+            onclick="closeAddAlbumModal()"
+        >
+            ×
+        </button>
 
 
-                    <div class="form-group">
+        <div class="modal-header">
 
-                        <label for="albumPhotos">
-                            Foto Album
-                        </label>
+            <span class="modal-icon">
+                💗
+            </span>
 
-                        <input
-                            type="file"
-                            id="albumPhotos"
-                            accept="image/*"
-                            multiple
-                        >
+            <h2>
+                Buat Album Baru
+            </h2>
 
-                        <small>
-                            Bisa memilih beberapa foto sekaligus.
-                            Foto pertama menjadi cover album.
-                        </small>
+            <p>
+                Buat satu album untuk menyimpan
+                beberapa foto dalam satu cerita.
+            </p>
 
-                    </div>
+        </div>
+
+
+        <form
+            id="albumForm"
+            onsubmit="tambahAlbum(event)"
+        >
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+                        Nama Album
+                    </label>
+
+                    <input
+                        id="albumTitle"
+                        type="text"
+                        placeholder="Contoh: Hari Pertama Kita"
+                        required
+                    >
 
                 </div>
 
 
                 <div class="form-group">
 
-                    <label for="albumStory">
+                    <label>
+                        Tanggal
+                    </label>
+
+                    <input
+                        id="albumDate"
+                        type="date"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Lokasi
+                    </label>
+
+                    <input
+                        id="albumLocation"
+                        type="text"
+                        placeholder="Contoh: Ambon"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
                         Cerita Album
                     </label>
 
                     <textarea
                         id="albumStory"
-                        rows="6"
-                        placeholder="Ceritakan kenangan pada hari ini..."
+                        rows="4"
+                        placeholder="Ceritakan kenangan ini..."
                     ></textarea>
 
                 </div>
 
+            </div>
 
-                <div
-                    id="albumFormMessage"
-                    class="form-message"
+
+            <div class="form-group">
+
+                <label>
+                    Foto Album
+                </label>
+
+                <input
+                    id="albumPhotos"
+                    type="file"
+                    accept="image/*"
+                    multiple
                 >
-                </div>
 
-
-                <div class="form-actions">
-
-                    <button
-                        type="button"
-                        class="secondary-button"
-                        onclick="closeAlbumForm()"
-                    >
-                        Batal
-                    </button>
-
-                    <button
-                        type="submit"
-                        class="primary-button"
-                        id="saveAlbumButton"
-                    >
-                        Buat Album ❤️
-                    </button>
-
-                </div>
-
-            </form>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         ALBUM VIEWER
-         ===================================================== -->
-
-    <div
-        id="albumViewer"
-        class="modal hidden"
-    >
-
-        <div
-            class="modal-overlay"
-            onclick="closeAlbumViewer()"
-        >
-        </div>
-
-
-        <div class="modal-box album-viewer-box">
-
-            <button
-                class="modal-close"
-                onclick="closeAlbumViewer()"
-            >
-                ×
-            </button>
-
-
-            <div id="albumViewerContent">
-
-                <div class="loading-box">
-                    Memuat album...
-                </div>
+                <small class="input-help">
+                    Foto pertama akan digunakan sebagai cover album.
+                </small>
 
             </div>
 
-        </div>
 
-    </div>
-
-
-    <!-- =====================================================
-         LOGIN MODAL
-         ===================================================== -->
-
-    <div
-        id="loginModal"
-        class="modal hidden"
-    >
-
-        <div
-            class="modal-overlay"
-            onclick="closeLoginModal()"
-        >
-        </div>
+            <div
+                id="albumPreview"
+                class="photo-preview"
+            ></div>
 
 
-        <div class="modal-box login-box">
-
-            <button
-                class="modal-close"
-                onclick="closeLoginModal()"
-            >
-                ×
-            </button>
+            <div
+                id="albumMessage"
+                class="form-message"
+            ></div>
 
 
-            <span class="section-label">
-                ADMIN
-            </span>
+            <div class="modal-actions">
 
-            <h2>
-                Masuk
-            </h2>
-
-            <p>
-                Login untuk mengelola album dan foto.
-            </p>
-
-
-            <form
-                onsubmit="event.preventDefault(); loginAdmin();"
-            >
-
-                <div class="form-group">
-
-                    <label>
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        id="loginEmail"
-                        placeholder="Email admin"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Password
-                    </label>
-
-                    <input
-                        type="password"
-                        id="loginPassword"
-                        placeholder="Password"
-                        required
-                    >
-
-                </div>
-
-
-                <div
-                    id="loginMessage"
-                    class="form-message"
+                <button
+                    type="button"
+                    class="secondary-button"
+                    onclick="closeAddAlbumModal()"
                 >
-                </div>
-
+                    Batal
+                </button>
 
                 <button
                     type="submit"
-                    class="primary-button full-button"
-                    id="loginSubmitButton"
+                    id="saveAlbumButton"
+                    class="primary-button"
                 >
-                    Login
+                    Buat Album ❤️
                 </button>
 
-            </form>
+            </div>
 
-        </div>
+        </form>
 
     </div>
 
+</div>
 
-    <!-- =====================================================
-         IMAGE VIEWER
-         ===================================================== -->
+
+<!-- =====================================================
+     ALBUM VIEWER
+===================================================== -->
+
+<div
+    id="albumViewer"
+    class="modal hidden"
+>
 
     <div
-        id="imageViewer"
-        class="image-viewer hidden"
-        onclick="closeImageViewer()"
-    >
+        class="modal-overlay"
+        onclick="closeAlbumViewer()"
+    ></div>
+
+    <div class="modal-box album-modal">
 
         <button
-            class="image-viewer-close"
-            onclick="closeImageViewer()"
+            class="modal-close"
+            onclick="closeAlbumViewer()"
         >
             ×
         </button>
 
-        <img
-            id="imageViewerImage"
-            src=""
-            alt="Foto kenangan"
-        >
+
+        <div
+            id="albumViewerContent"
+            class="album-viewer-content"
+        ></div>
 
     </div>
 
+</div>
 
-    <!-- =====================================================
-         PLAYLIST MODAL
-         ===================================================== -->
+
+<!-- =====================================================
+     PLAYLIST MODAL
+===================================================== -->
+
+<div
+    id="playlistModal"
+    class="modal hidden"
+>
 
     <div
-        id="playlistModal"
-        class="modal hidden"
-    >
+        class="modal-overlay"
+        onclick="closePlaylist()"
+    ></div>
 
-        <div
-            class="modal-overlay"
+    <div class="modal-box small-modal">
+
+        <button
+            class="modal-close"
             onclick="closePlaylist()"
         >
-        </div>
+            ×
+        </button>
 
+        <div class="modal-header">
 
-        <div class="modal-box">
-
-            <button
-                class="modal-close"
-                onclick="closePlaylist()"
-            >
-                ×
-            </button>
-
-
-            <span class="section-label">
-                OUR SONGS
+            <span class="modal-icon">
+                🎵
             </span>
 
             <h2>
-                Playlist Kita 🎵
+                Playlist Kita
             </h2>
 
-            <div class="playlist-list">
+            <p>
+                Lagu-lagu yang mengingatkan
+                kita pada cerita kita.
+            </p>
 
-                <div class="playlist-item">
-                    <span>01</span>
-                    <strong>Lagu pertama kita</strong>
+        </div>
+
+
+        <div class="playlist-list">
+
+            <div class="playlist-item">
+                <span>🎧</span>
+                <div>
+                    <strong>
+                        Lagu Kita
+                    </strong>
+                    <small>
+                        Kenangan kita
+                    </small>
                 </div>
+            </div>
 
-                <div class="playlist-item">
-                    <span>02</span>
-                    <strong>Lagu yang selalu mengingatkanmu</strong>
+
+            <div class="playlist-item">
+                <span>❤️</span>
+                <div>
+                    <strong>
+                        Our Song
+                    </strong>
+                    <small>
+                        Untuk Lila
+                    </small>
                 </div>
-
-                <div class="playlist-item">
-                    <span>03</span>
-                    <strong>Lagu favorit kita</strong>
-                </div>
-
             </div>
 
         </div>
 
     </div>
 
+</div>
 
-    <!-- =====================================================
-         JAVASCRIPT
-         ===================================================== -->
 
-    <script src="script.js"></script>
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="./script.js"></script>
 
 </body>
 </html>
