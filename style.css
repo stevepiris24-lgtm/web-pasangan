@@ -1,13 +1,6 @@
-/* =========================================================
-   UNTUK LILA ❤️
-   STYLE.CSS - FINAL VERSION
-   WEBSITE CERITA / ALBUM KENANGAN
-========================================================= */
-
-
-/* =========================================================
-   1. RESET
-========================================================= */
+/* =====================================================
+   RESET
+===================================================== */
 
 * {
     margin: 0;
@@ -22,28 +15,19 @@ html {
 
 
 body {
-    min-height: 100vh;
-
-    font-family:
-        "Poppins",
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
     background:
         radial-gradient(
-            circle at top left,
-            rgba(255, 77, 136, 0.12),
-            transparent 35%
+            circle at 80% 10%,
+            rgba(255, 92, 145, .08),
+            transparent 30%
         ),
-        radial-gradient(
-            circle at bottom right,
-            rgba(255, 120, 170, 0.10),
-            transparent 35%
-        ),
-        #09090b;
+        #080809;
 
-    color: #f5f5f7;
+    color: #f8f6f7;
+
+    font-family: "DM Sans", sans-serif;
+
+    min-height: 100vh;
 
     overflow-x: hidden;
 }
@@ -51,8 +35,7 @@ body {
 
 button,
 input,
-textarea,
-select {
+textarea {
     font-family: inherit;
 }
 
@@ -74,1092 +57,889 @@ a {
 }
 
 
-/* =========================================================
-   2. SCROLLBAR
-========================================================= */
+/* =====================================================
+   BACKGROUND
+===================================================== */
 
-::-webkit-scrollbar {
-    width: 8px;
+.background-glow {
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    filter: blur(120px);
+
+    pointer-events: none;
+
+    opacity: .15;
+
+    z-index: -1;
 }
 
 
-::-webkit-scrollbar-track {
-    background: #0a0a0c;
+.glow-one {
+    background: #ff4d86;
+
+    top: -250px;
+    right: -200px;
 }
 
 
-::-webkit-scrollbar-thumb {
-    background: rgba(255, 80, 140, 0.45);
-    border-radius: 999px;
+.glow-two {
+    background: #735cff;
+
+    bottom: -300px;
+    left: -250px;
 }
 
 
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 80, 140, 0.7);
-}
-
-
-/* =========================================================
-   3. GENERAL CONTAINER
-========================================================= */
-
-.container {
-    width: min(
-        1180px,
-        calc(100% - 32px)
-    );
-
-    margin:
-        0 auto;
-}
-
-
-/* =========================================================
-   4. HEADER
-========================================================= */
-
-header,
-.navbar,
-.topbar {
-    position: relative;
-    z-index: 50;
-}
-
+/* =====================================================
+   NAVBAR
+===================================================== */
 
 .navbar {
-    width: min(
-        1180px,
-        calc(100% - 32px)
-    );
+    width: min(1080px, calc(100% - 40px));
 
-    margin: 18px auto 0;
+    margin: auto;
 
-    padding:
-        14px 18px;
+    padding: 25px 0;
 
-    border:
-        1px solid rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
-
-    border-radius: 20px;
-
-    background:
-        rgba(
-            18,
-            18,
-            22,
-            0.82
-        );
-
-    backdrop-filter:
-        blur(18px);
-
-    -webkit-backdrop-filter:
-        blur(18px);
-
-    box-shadow:
-        0 18px 50px
-        rgba(0, 0, 0, 0.28);
-}
-
-
-.navbar-inner {
     display: flex;
 
     align-items: center;
 
     justify-content: space-between;
-
-    gap: 20px;
 }
 
 
-.logo {
+.nav-logo {
+    font-family: "Parisienne", cursive;
+
+    font-size: 28px;
+
+    color: #ff85a9;
+}
+
+
+.nav-logo b {
+    font-family: serif;
+
+    font-size: 25px;
+}
+
+
+.navbar nav {
     display: flex;
 
     align-items: center;
 
-    gap: 10px;
+    gap: 28px;
 
-    font-size: 18px;
-
-    font-weight: 700;
-
-    color: #fff;
+    color: #aaa;
 }
 
 
-.logo-heart {
-    width: 38px;
-    height: 38px;
+.navbar nav a {
+    font-size: 14px;
 
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff4f8b,
-            #ff78aa
-        );
-
-    box-shadow:
-        0 8px 25px
-        rgba(
-            255,
-            79,
-            139,
-            0.35
-        );
+    transition: .25s;
 }
 
 
-/* =========================================================
-   5. NAVIGATION
-========================================================= */
-
-.nav-links {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    list-style: none;
+.navbar nav a:hover {
+    color: #ff7fa5;
 }
 
 
-.nav-links a,
-.nav-link {
-    padding:
-        9px 14px;
+.nav-admin {
+    border: 1px solid #29292e;
 
-    border-radius: 12px;
+    background: #151519;
 
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.72
-        );
+    color: #ddd;
 
-    font-size: 13px;
+    padding: 9px 16px;
 
-    transition:
-        0.25s ease;
+    border-radius: 100px;
+
+    transition: .25s;
 }
 
 
-.nav-links a:hover,
-.nav-link:hover {
-    color: #fff;
+.nav-admin:hover {
+    border-color: #ff719d;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.06
-        );
+    color: #ff719d;
 }
 
 
-/* =========================================================
-   6. HERO
-========================================================= */
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.section-container {
+    width: min(1080px, calc(100% - 40px));
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
 
 .hero {
-    position: relative;
+    min-height: 490px;
 
-    min-height: 680px;
+    padding-top: 75px;
 
-    display: flex;
+    display: grid;
+
+    grid-template-columns: 1fr 350px;
 
     align-items: center;
 
-    justify-content: center;
-
-    text-align: center;
-
-    padding:
-        100px 20px 80px;
-
-    overflow: hidden;
+    gap: 70px;
 }
 
 
-.hero::before {
+.small-title {
+    font-family: "Parisienne", cursive;
+
+    color: #ff83a7;
+
+    font-size: 58px;
+
+    line-height: 1;
+
+    margin-bottom: 35px;
+}
+
+
+.hero h1 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(42px, 5vw, 67px);
+
+    line-height: 1.08;
+
+    letter-spacing: -2px;
+
+    max-width: 650px;
+}
+
+
+.hero-date {
+    color: #92929a;
+
+    margin-top: 30px;
+
+    font-size: 15px;
+}
+
+
+.hero-date strong {
+    color: #d5d5d8;
+}
+
+
+.hero-date span {
+    color: #ff4e86;
+}
+
+
+/* =====================================================
+   HERO PHOTO
+===================================================== */
+
+.hero-photo {
+    display: flex;
+
+    justify-content: center;
+}
+
+
+.photo-frame {
+    width: 310px;
+    height: 390px;
+
+    border-radius: 30px;
+
+    padding: 8px;
+
+    border: 1px solid rgba(255, 117, 155, .35);
+
+    transform: rotate(3deg);
+
+    position: relative;
+}
+
+
+.photo-frame::before {
     content: "";
 
     position: absolute;
 
-    inset: 0;
+    inset: -15px;
+
+    border: 1px solid rgba(255, 117, 155, .15);
+
+    border-radius: 35px;
+
+    z-index: -1;
+}
+
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 23px;
+
+    filter: grayscale(100%);
+}
+
+
+/* =====================================================
+   QUICK CARDS
+===================================================== */
+
+.quick-section {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+
+    margin-top: 20px;
+}
+
+
+.quick-card {
+    min-height: 205px;
 
     background:
         linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.15),
-            rgba(0, 0, 0, 0.65)
+            145deg,
+            rgba(31, 31, 36, .85),
+            rgba(18, 18, 21, .85)
         );
 
-    pointer-events: none;
+    border: 1px solid #28282d;
+
+    border-radius: 22px;
+
+    padding: 28px;
+
+    transition: .3s;
 }
 
 
-.hero-content {
-    position: relative;
+.quick-card:hover {
+    transform: translateY(-5px);
 
-    z-index: 2;
-
-    width: min(
-        850px,
-        100%
-    );
+    border-color: #49404a;
 }
 
 
-.hero-title,
-#heroTitle,
-#dynamicText {
-    color: #fff;
+.quick-icon {
+    font-size: 24px;
 
-    font-size:
-        clamp(
-            32px,
-            6vw,
-            70px
-        );
-
-    line-height: 1.08;
-
-    font-weight: 700;
-
-    letter-spacing: -1.5px;
-
-    text-shadow:
-        0 10px 40px
-        rgba(0, 0, 0, 0.6);
-
-    transition:
-        opacity 0.45s ease;
+    margin-bottom: 20px;
 }
 
 
-.hero-subtitle {
+.quick-card h3 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 24px;
+
+    margin-bottom: 8px;
+}
+
+
+.quick-card strong {
+    display: block;
+
+    color: #e4e4e7;
+
+    font-size: 16px;
+
+    font-weight: 500;
+}
+
+
+.quick-card p {
+    color: #77777f;
+
     margin-top: 20px;
 
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.72
-        );
-
-    font-size:
-        clamp(
-            14px,
-            2vw,
-            18px
-        );
-
-    line-height: 1.8;
+    font-size: 13px;
 }
 
 
-/* =========================================================
-   7. HERO BUTTON
-========================================================= */
+.text-button {
+    border: none;
 
-.hero-buttons {
-    display: flex;
+    background: transparent;
 
-    justify-content: center;
+    color: #ff719b;
 
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 12px;
-
-    margin-top: 30px;
-}
-
-
-.hero-button {
-    min-height: 46px;
-
-    padding:
-        0 22px;
-
-    border: 0;
-
-    border-radius: 14px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff4f8b,
-            #ff6fa3
-        );
-
-    color: white;
-
-    font-size: 14px;
+    margin-top: 20px;
 
     font-weight: 600;
 
-    box-shadow:
-        0 12px 35px
-        rgba(
-            255,
-            79,
-            139,
-            0.28
-        );
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
+    padding: 0;
 }
 
 
-.hero-button:hover {
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 16px 40px
-        rgba(
-            255,
-            79,
-            139,
-            0.4
-        );
-}
-
-
-/* =========================================================
-   8. TIME TOGETHER
-========================================================= */
-
-.time-together {
-    width: min(
-        800px,
-        calc(100% - 30px)
-    );
-
-    margin:
-        -70px auto 80px;
-
-    position: relative;
-
-    z-index: 5;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            2,
-            1fr
-        );
-
-    gap: 14px;
-}
-
-
-.time-box {
-    padding:
-        25px 20px;
-
-    text-align: center;
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
-
-    border-radius: 20px;
-
-    background:
-        rgba(
-            20,
-            20,
-            24,
-            0.88
-        );
-
-    backdrop-filter:
-        blur(15px);
-
-    box-shadow:
-        0 18px 45px
-        rgba(
-            0,
-            0,
-            0,
-            0.28
-        );
-}
-
-
-.time-number {
-    font-size: 32px;
-
-    font-weight: 700;
-
-    color: #ff72a5;
-}
-
-
-.time-label {
-    margin-top: 4px;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.55
-        );
-
-    font-size: 12px;
-}
-
-
-/* =========================================================
-   9. SECTION
-========================================================= */
-
-section {
-    position: relative;
-}
-
-
-.section-title {
-    text-align: center;
-
-    font-size:
-        clamp(
-            28px,
-            5vw,
-            46px
-        );
-
-    font-weight: 700;
-
-    margin-bottom: 12px;
-}
-
-
-.section-description {
-    max-width: 650px;
-
-    margin:
-        0 auto 50px;
-
-    text-align: center;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.58
-        );
-
-    line-height: 1.8;
-
-    font-size: 14px;
-}
-
-
-/* =========================================================
-   10. TIMELINE WRAPPER
-========================================================= */
-
-.timeline-section {
-    width: min(
-        1050px,
-        calc(100% - 32px)
-    );
-
-    margin:
-        0 auto;
-
-    padding:
-        50px 0 100px;
-}
-
-
-#timelineList {
-    position: relative;
-
+.quote-card {
     display: flex;
 
     flex-direction: column;
 
-    gap: 34px;
-
-    padding:
-        10px 0;
+    justify-content: center;
 }
 
 
-/* =========================================================
-   11. TIMELINE LINE
-========================================================= */
+.quote-mark {
+    color: #ff80a4;
 
-#timelineList::before {
+    font-size: 40px;
+
+    line-height: .5;
+
+    margin-bottom: 20px;
+}
+
+
+.quote-card p {
+    margin: 0;
+
+    color: #dedee1;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.timeline-section,
+.albums-section {
+    padding-top: 130px;
+}
+
+
+.section-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 30px;
+
+    margin-bottom: 55px;
+}
+
+
+.section-heading span,
+.modal-header span {
+    color: #ff719d;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    font-weight: 700;
+}
+
+
+.section-heading h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 45px;
+
+    margin-top: 12px;
+}
+
+
+.section-heading p {
+    color: #77777f;
+
+    margin-top: 12px;
+
+    max-width: 550px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.primary-button {
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff5c8a,
+            #ff7ba2
+        );
+
+    color: white;
+
+    padding: 13px 20px;
+
+    border-radius: 100px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 8px 25px rgba(255, 82, 133, .15);
+
+    transition: .25s;
+
+    white-space: nowrap;
+}
+
+
+.primary-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(255, 82, 133, .28);
+}
+
+
+.primary-button.full {
+    width: 100%;
+
+    margin-top: 15px;
+}
+
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+.timeline {
+    position: relative;
+
+    max-width: 850px;
+
+    margin: auto;
+}
+
+
+.timeline::before {
     content: "";
 
     position: absolute;
 
+    left: 50%;
+
     top: 0;
+
     bottom: 0;
 
-    left: 28px;
-
-    width: 2px;
+    width: 1px;
 
     background:
         linear-gradient(
             to bottom,
             transparent,
-            rgba(
-                255,
-                88,
-                145,
-                0.65
-            ),
-            rgba(
-                255,
-                88,
-                145,
-                0.15
-            ),
+            #ff6793,
             transparent
         );
 }
 
 
-/* =========================================================
-   12. TIMELINE ITEM
-========================================================= */
-
 .timeline-item {
+    width: 50%;
+
+    padding: 15px 45px;
+
     position: relative;
+}
 
-    display: grid;
 
-    grid-template-columns:
-        58px 1fr;
+.timeline-item:nth-child(odd) {
+    left: 0;
 
-    gap: 18px;
+    text-align: right;
+}
 
-    min-width: 0;
+
+.timeline-item:nth-child(even) {
+    left: 50%;
 }
 
 
 .timeline-dot {
-    position: relative;
+    position: absolute;
 
-    z-index: 3;
-
-    width: 18px;
-    height: 18px;
-
-    margin-top: 28px;
-
-    margin-left: 20px;
+    width: 13px;
+    height: 13px;
 
     border-radius: 50%;
 
-    background:
-        #ff5d94;
+    background: #ff6b98;
 
-    border:
-        4px solid
-        #09090b;
+    top: 30px;
 
     box-shadow:
-        0 0 0 3px
-        rgba(
-            255,
-            93,
-            148,
-            0.25
-        ),
-        0 8px 20px
-        rgba(
-            255,
-            93,
-            148,
-            0.3
-        );
+        0 0 0 6px #080809,
+        0 0 20px rgba(255, 107, 152, .5);
 }
 
 
-/* =========================================================
-   13. TIMELINE CARD
-========================================================= */
-
-.timeline-card {
-    display: grid;
-
-    grid-template-columns:
-        290px 1fr;
-
-    min-width: 0;
-
-    overflow: hidden;
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
-
-    border-radius: 24px;
-
-    background:
-        rgba(
-            19,
-            19,
-            23,
-            0.92
-        );
-
-    box-shadow:
-        0 18px 55px
-        rgba(
-            0,
-            0,
-            0,
-            0.32
-        );
-
-    transition:
-        transform 0.3s ease,
-        border-color 0.3s ease;
+.timeline-item:nth-child(odd)
+.timeline-dot {
+    right: -6px;
 }
 
 
-.timeline-card:hover {
-    transform:
-        translateY(-3px);
-
-    border-color:
-        rgba(
-            255,
-            95,
-            148,
-            0.25
-        );
-}
-
-
-/* =========================================================
-   14. TIMELINE COVER
-========================================================= */
-
-.timeline-cover-wrapper {
-    position: relative;
-
-    width: 100%;
-
-    height: 100%;
-
-    min-height: 260px;
-
-    overflow: hidden;
-
-    background:
-        #111116;
-}
-
-
-.timeline-cover {
-    width: 100%;
-
-    height: 100%;
-
-    min-height: 260px;
-
-    object-fit: cover;
-
-    object-position: center;
-
-    transition:
-        transform 0.45s ease;
-}
-
-
-.timeline-card:hover
-.timeline-cover {
-    transform:
-        scale(1.035);
-}
-
-
-.timeline-cover-placeholder,
-.timeline-cover-empty {
-    width: 100%;
-
-    height: 100%;
-
-    min-height: 260px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 40px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #1d151a,
-            #111116
-        );
-}
-
-
-.photo-count {
-    position: absolute;
-
-    right: 12px;
-    bottom: 12px;
-
-    padding:
-        7px 11px;
-
-    border-radius: 999px;
-
-    background:
-        rgba(
-            0,
-            0,
-            0,
-            0.68
-        );
-
-    color: #fff;
-
-    font-size: 11px;
-
-    backdrop-filter:
-        blur(8px);
-}
-
-
-/* =========================================================
-   15. TIMELINE BODY
-========================================================= */
-
-.timeline-body {
-    min-width: 0;
-
-    padding:
-        28px 30px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
+.timeline-item:nth-child(even)
+.timeline-dot {
+    left: -6px;
 }
 
 
 .timeline-date {
-    color:
-        #ff6fa1;
+    color: #ff789f;
 
     font-size: 12px;
 
-    font-weight: 600;
+    font-weight: 700;
 
-    text-transform: uppercase;
-
-    letter-spacing: 0.8px;
-
-    margin-bottom: 9px;
+    margin-bottom: 8px;
 }
 
 
-.timeline-title {
-    color: #fff;
+.timeline-content {
+    background: #151518;
 
-    font-size:
-        clamp(
-            20px,
-            3vw,
-            29px
-        );
+    border: 1px solid #27272c;
 
-    line-height: 1.2;
+    border-radius: 20px;
+
+    padding: 25px;
+
+    text-align: left;
+
+    transition: .3s;
+}
+
+
+.timeline-item:nth-child(odd)
+.timeline-content {
+    text-align: left;
+}
+
+
+.timeline-content:hover {
+    border-color: #49343e;
+
+    transform: translateY(-3px);
+}
+
+
+.timeline-content h3 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 22px;
 
     margin-bottom: 10px;
-
-    overflow-wrap: anywhere;
 }
 
 
-.timeline-location {
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.58
-        );
+.timeline-content p {
+    color: #85858d;
 
-    font-size: 13px;
+    font-size: 14px;
 
-    margin-bottom: 14px;
+    line-height: 1.7;
 }
 
 
-.timeline-story {
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.68
-        );
+/* =====================================================
+   ALBUM
+===================================================== */
 
-    font-size: 13px;
+.album-grid {
+    display: grid;
 
-    line-height: 1.8;
+    grid-template-columns:
+        repeat(3, 1fr);
 
-    white-space: pre-line;
+    gap: 25px;
 
-    overflow-wrap: anywhere;
+    padding-bottom: 120px;
+}
 
-    display:
-        -webkit-box;
 
-    -webkit-line-clamp: 5;
+.album-card {
+    overflow: hidden;
 
-    -webkit-box-orient: vertical;
+    background: #141417;
+
+    border: 1px solid #29292e;
+
+    border-radius: 22px;
+
+    transition: .3s;
+}
+
+
+.album-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #51404a;
+}
+
+
+.album-cover {
+    height: 250px;
+
+    position: relative;
 
     overflow: hidden;
+
+    background: #202024;
 }
 
 
-/* =========================================================
-   16. TIMELINE ACTIONS
-========================================================= */
+.album-cover img {
+    width: 100%;
+    height: 100%;
 
-.timeline-actions {
+    object-fit: cover;
+
+    transition: .5s;
+}
+
+
+.album-card:hover .album-cover img {
+    transform: scale(1.06);
+}
+
+
+.album-count {
+    position: absolute;
+
+    right: 14px;
+    top: 14px;
+
+    background: rgba(0, 0, 0, .7);
+
+    backdrop-filter: blur(10px);
+
+    padding: 7px 11px;
+
+    border-radius: 100px;
+
+    font-size: 12px;
+}
+
+
+.album-info {
+    padding: 22px;
+}
+
+
+.album-info h3 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 24px;
+
+    margin-bottom: 8px;
+}
+
+
+.album-info p {
+    color: #77777f;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    min-height: 42px;
+}
+
+
+.album-date {
+    color: #ff739d;
+
+    font-size: 12px;
+
+    margin-top: 15px;
+}
+
+
+.album-actions {
     display: flex;
 
-    align-items: center;
+    gap: 8px;
 
-    flex-wrap: wrap;
-
-    gap: 9px;
-
-    margin-top: 22px;
+    margin-top: 20px;
 }
 
 
-/* =========================================================
-   17. BUTTONS
-========================================================= */
+.album-open {
+    flex: 1;
 
-.primary-button,
-.secondary-button,
-.btn-primary,
-.btn-secondary {
-    min-height: 42px;
+    border: none;
 
-    padding:
-        0 16px;
+    background: #25252a;
 
-    border-radius: 12px;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    border: 1px solid transparent;
-
-    transition:
-        0.25s ease;
-}
-
-
-.primary-button,
-.btn-primary {
     color: white;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ff4f8b,
-            #ff709f
-        );
+    padding: 10px;
 
-    box-shadow:
-        0 9px 25px
-        rgba(
-            255,
-            79,
-            139,
-            0.22
-        );
-}
-
-
-.primary-button:hover,
-.btn-primary:hover {
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        0 12px 30px
-        rgba(
-            255,
-            79,
-            139,
-            0.35
-        );
-}
-
-
-.secondary-button,
-.btn-secondary {
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.78
-        );
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.05
-        );
-
-    border-color:
-        rgba(
-            255,
-            255,
-            255,
-            0.09
-        );
-}
-
-
-.secondary-button:hover,
-.btn-secondary:hover {
-    color: white;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.09
-        );
-}
-
-
-/* =========================================================
-   18. ADMIN BUTTON
-========================================================= */
-
-.admin-button {
-    min-height: 42px;
-
-    padding:
-        0 16px;
-
-    border: 1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.1
-        );
-
-    border-radius: 12px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.05
-        );
-
-    color: #fff;
-
-    font-size: 12px;
+    border-radius: 10px;
 
     font-weight: 600;
 }
 
 
-.admin-button:hover {
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.09
-        );
+.album-add {
+    border: 1px solid #33333a;
+
+    background: transparent;
+
+    color: #ff739d;
+
+    padding: 10px 13px;
+
+    border-radius: 10px;
 }
 
 
-/* =========================================================
-   19. HIDDEN
-========================================================= */
+/* =====================================================
+   ALBUM MODAL
+===================================================== */
 
-.hidden {
-    display: none !important;
+.album-modal-box {
+    width: min(1000px, 94vw);
 }
 
 
-/* =========================================================
-   20. MODAL BASE
-========================================================= */
+.album-modal-top {
+    display: flex;
 
-#loginModal,
-#addAlbumModal,
-#albumViewer,
-#playlistModal {
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+
+.album-modal-top h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 38px;
+
+    margin-top: 10px;
+}
+
+
+.album-modal-top p {
+    color: #85858d;
+
+    margin-top: 8px;
+}
+
+
+.photo-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 14px;
+}
+
+
+.photo-item {
+    position: relative;
+
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+    background: #202023;
+}
+
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    cursor: zoom-in;
+
+    transition: .3s;
+}
+
+
+.photo-item:hover img {
+    transform: scale(1.05);
+}
+
+
+.delete-photo {
+    position: absolute;
+
+    right: 8px;
+    top: 8px;
+
+    border: none;
+
+    background: rgba(0, 0, 0, .75);
+
+    color: white;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal {
     position: fixed;
 
     inset: 0;
 
-    z-index: 9990;
+    background: rgba(0, 0, 0, .78);
 
-    display: flex;
+    backdrop-filter: blur(12px);
+
+    display: none;
 
     align-items: center;
 
@@ -1167,1818 +947,424 @@ section {
 
     padding: 20px;
 
-    background:
-        rgba(
-            0,
-            0,
-            0,
-            0.78
-        );
-
-    backdrop-filter:
-        blur(12px);
-
-    -webkit-backdrop-filter:
-        blur(12px);
+    z-index: 1000;
 }
 
 
-#loginModal.hidden,
-#addAlbumModal.hidden,
-#albumViewer.hidden,
-#playlistModal.hidden {
-    display: none !important;
+.modal.show {
+    display: flex;
 }
 
 
-/* =========================================================
-   21. MODAL CARD
-========================================================= */
+.modal-box {
+    width: min(540px, 95vw);
 
-.modal-content,
-.modal-box,
-.login-box,
-.add-album-box {
-    width: min(
-        700px,
-        100%
-    );
-
-    max-height:
-        calc(
-            100vh - 40px
-        );
+    max-height: 90vh;
 
     overflow-y: auto;
 
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.09
-        );
+    background: #161619;
 
-    border-radius: 26px;
+    border: 1px solid #303035;
 
-    background:
-        #151519;
+    border-radius: 25px;
+
+    padding: 32px;
+
+    position: relative;
 
     box-shadow:
-        0 30px 100px
-        rgba(
-            0,
-            0,
-            0,
-            0.55
-        );
+        0 30px 100px rgba(0, 0, 0, .5);
 }
 
 
-/* =========================================================
-   22. LOGIN MODAL
-========================================================= */
+.modal-close {
+    position: absolute;
 
-#loginModal .modal-content,
-#loginModal .modal-box,
-#loginModal .login-box {
-    max-width: 430px;
+    right: 18px;
+    top: 18px;
 
-    padding: 30px;
+    width: 36px;
+    height: 36px;
+
+    border: 1px solid #33333a;
+
+    background: #202024;
+
+    color: #aaa;
+
+    border-radius: 50%;
+
+    font-size: 20px;
 }
 
 
-.login-title {
-    font-size: 25px;
-
-    margin-bottom: 7px;
+.modal-header {
+    margin-bottom: 28px;
 }
 
 
-.login-subtitle {
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.55
-        );
+.modal-header h2 {
+    font-family: "Playfair Display", serif;
 
-    font-size: 13px;
+    font-size: 34px;
 
-    line-height: 1.7;
-
-    margin-bottom: 25px;
+    margin-top: 10px;
 }
 
 
-/* =========================================================
-   23. FORM
-========================================================= */
+.modal-header p {
+    color: #77777f;
 
-.form-group {
-    margin-bottom: 19px;
+    margin-top: 8px;
+
+    line-height: 1.5;
 }
 
 
-.form-group label,
-label {
+/* =====================================================
+   FORM
+===================================================== */
+
+form label {
     display: block;
 
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.78
-        );
-
     font-size: 13px;
+
+    color: #bbb;
+
+    margin-top: 18px;
 
     margin-bottom: 8px;
 }
 
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
-input[type="file"],
-textarea,
-select {
+form input,
+form textarea {
     width: 100%;
 
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.1
-        );
+    border: 1px solid #33333a;
 
-    border-radius: 15px;
+    background: #0f0f11;
 
-    background:
-        #0e0e11;
+    color: white;
 
-    color: #fff;
+    border-radius: 12px;
+
+    padding: 13px 15px;
 
     outline: none;
 
-    font-size: 14px;
-
-    transition:
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
+    transition: .2s;
 }
 
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
-select {
-    min-height: 52px;
+form input:focus,
+form textarea:focus {
+    border-color: #ff6c98;
 
-    padding:
-        0 16px;
+    box-shadow:
+        0 0 0 3px rgba(255, 108, 152, .08);
+}
+
+
+form textarea {
+    min-height: 100px;
+
+    resize: vertical;
 }
 
 
 input[type="file"] {
-    min-height: 52px;
-
-    padding: 9px 12px;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.72
-        );
+    padding: 10px;
 }
 
-
-textarea {
-    min-height: 150px;
-
-    padding:
-        14px 16px;
-
-    resize: vertical;
-
-    line-height: 1.7;
-}
-
-
-input:focus,
-textarea:focus,
-select:focus {
-    border-color:
-        rgba(
-            255,
-            95,
-            148,
-            0.65
-        );
-
-    box-shadow:
-        0 0 0 4px
-        rgba(
-            255,
-            95,
-            148,
-            0.09
-        );
-}
-
-
-/* =========================================================
-   24. DATE INPUT
-========================================================= */
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-    filter:
-        invert(1);
-
-    opacity: 0.7;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   25. FILE INPUT
-========================================================= */
 
 input[type="file"]::file-selector-button {
-    border: 0;
+    border: none;
 
-    border-radius: 9px;
+    background: #29292e;
 
-    padding:
-        9px 13px;
+    color: white;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
 
     margin-right: 10px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.09
-        );
-
-    color: #fff;
-
-    cursor: pointer;
 }
 
-
-input[type="file"]::file-selector-button:hover {
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.14
-        );
-}
-
-
-/* =========================================================
-   26. ADD ALBUM MODAL
-========================================================= */
-
-#addAlbumModal {
-    align-items: center;
-
-    overflow-y: auto;
-}
-
-
-#addAlbumModal
-.modal-content,
-#addAlbumModal
-.modal-box,
-#addAlbumModal
-.add-album-box {
-    width: min(
-        900px,
-        100%
-    );
-
-    padding:
-        28px;
-
-    max-height:
-        calc(
-            100vh - 30px
-        );
-}
-
-
-.add-album-header {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 15px;
-
-    margin-bottom: 25px;
-}
-
-
-.add-album-header h2 {
-    font-size:
-        clamp(
-            22px,
-            4vw,
-            30px
-        );
-}
-
-
-.modal-close,
-.close-modal,
-.album-close-btn {
-    width: 40px;
-    height: 40px;
-
-    flex: 0 0 auto;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.07
-        );
-
-    color: #fff;
-
-    font-size: 23px;
-
-    line-height: 1;
-}
-
-
-.modal-close:hover,
-.close-modal:hover,
-.album-close-btn:hover {
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.12
-        );
-}
-
-
-/* =========================================================
-   27. TWO COLUMN FORM
-========================================================= */
-
-.form-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(
-                0,
-                1fr
-            )
-        );
-
-    gap:
-        0 25px;
-}
-
-
-.form-full {
-    grid-column:
-        1 / -1;
-}
-
-
-/* =========================================================
-   28. FORM MESSAGE
-========================================================= */
 
 .form-message {
-    min-height: 22px;
+    text-align: center;
 
-    margin-top: 10px;
-
-    font-size: 12px;
-
-    line-height: 1.6;
-}
-
-
-.form-message.error {
-    color:
-        #ff668f;
-}
-
-
-.form-message.success {
-    color:
-        #70e0a0;
-}
-
-
-.form-message.info {
-    color:
-        #91bfff;
-}
-
-
-/* =========================================================
-   29. PHOTO PREVIEW
-========================================================= */
-
-#photoPreview,
-#previewFoto {
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fill,
-            minmax(
-                130px,
-                1fr
-            )
-        );
-
-    gap: 12px;
+    color: #ff719d;
 
     margin-top: 15px;
 }
 
 
-.photo-preview-item {
-    position: relative;
-
-    min-width: 0;
-}
-
-
-.preview-image-wrapper {
-    position: relative;
-
-    aspect-ratio:
-        1 / 1;
-
-    overflow: hidden;
-
-    border-radius: 14px;
-
-    background:
-        #0e0e11;
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
-}
-
-
-.preview-image-wrapper img {
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-}
-
-
-.cover-badge {
-    position: absolute;
-
-    left: 8px;
-    bottom: 8px;
-
-    padding:
-        5px 8px;
-
-    border-radius: 999px;
-
-    background:
-        #ff4f8b;
-
-    color: white;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    letter-spacing: 0.4px;
-}
-
-
-/* =========================================================
-   30. PHOTO HELP TEXT
-========================================================= */
-
-.photo-help,
-.form-help {
-    display: block;
-
-    margin-top: 7px;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.42
-        );
-
-    font-size: 11px;
-
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   31. MODAL FOOTER
-========================================================= */
-
-.modal-footer,
-.form-actions {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: flex-end;
-
-    flex-wrap: wrap;
-
-    gap: 10px;
-
-    margin-top: 26px;
-}
-
-
-.btn-submit,
-.submit-button {
-    min-height: 48px;
-
-    padding:
-        0 22px;
-
-    border: 0;
-
-    border-radius: 14px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff4f8b,
-            #ff709f
-        );
-
-    color: #fff;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    box-shadow:
-        0 12px 30px
-        rgba(
-            255,
-            79,
-            139,
-            0.25
-        );
-}
-
-
-.btn-submit:hover,
-.submit-button:hover {
-    transform:
-        translateY(-1px);
-}
-
-
-.btn-submit:disabled,
-.submit-button:disabled {
-    opacity: 0.55;
-
-    cursor:
-        not-allowed;
-
-    transform:
-        none;
-}
-
-
-.btn-cancel,
-.cancel-button {
-    min-height: 48px;
-
-    padding:
-        0 20px;
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.09
-        );
-
-    border-radius: 14px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.05
-        );
-
-    color: #fff;
-
-    font-size: 13px;
-
-    font-weight: 600;
-}
-
-
-/* =========================================================
-   32. ALBUM VIEWER
-========================================================= */
-
-#albumViewer {
-    align-items: center;
-
-    padding:
-        20px;
-}
-
-
-#albumViewerContent {
-    width: min(
-        1100px,
-        100%
-    );
-
-    max-height:
-        calc(
-            100vh - 40px
-        );
-
-    overflow-y: auto;
-
-    padding:
-        30px;
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.09
-        );
-
-    border-radius: 28px;
-
-    background:
-        #151519;
-
-    box-shadow:
-        0 30px 100px
-        rgba(
-            0,
-            0,
-            0,
-            0.6
-        );
-
-    position: relative;
-}
-
-
-/* =========================================================
-   33. ALBUM HEADER
-========================================================= */
-
-.album-viewer-header {
-    position: relative;
-
-    padding-bottom: 25px;
-
-    margin-bottom: 22px;
-
-    border-bottom:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.07
-        );
-}
-
-
-.album-viewer-header h2 {
-    padding-right: 50px;
-
-    font-size:
-        clamp(
-            25px,
-            5vw,
-            40px
-        );
-
-    line-height: 1.15;
-
-    margin-bottom: 12px;
-}
-
-
-.album-viewer-date {
-    color:
-        #ff6fa1;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.8px;
-
-    margin-bottom: 8px;
-}
-
-
-.album-viewer-location {
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.58
-        );
-
-    font-size: 13px;
-
-    margin-bottom: 15px;
-}
-
-
-.album-viewer-story {
-    max-width: 800px;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.68
-        );
-
-    font-size: 13px;
-
-    line-height: 1.8;
-
-    white-space: pre-line;
-}
-
-
-/* =========================================================
-   34. ALBUM TOOLBAR
-========================================================= */
-
-.album-toolbar {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 15px;
-
-    margin-bottom: 18px;
-}
-
-
-.album-toolbar h3 {
-    font-size: 18px;
-}
-
-
-.album-toolbar button {
-    flex-shrink: 0;
-}
-
-
-/* =========================================================
-   35. ALBUM PHOTO GRID
-   INI BAGIAN PENTING UNTUK MEMPERBAIKI
-   FOTO YANG TERLALU BESAR
-========================================================= */
-
-.album-photo-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            4,
-            minmax(
-                0,
-                1fr
-            )
-        );
-
-    gap: 12px;
-
-    width: 100%;
-}
-
-
-/* =========================================================
-   36. ALBUM PHOTO ITEM
-========================================================= */
-
-.album-photo-item {
-    position: relative;
-
-    width: 100%;
-
-    aspect-ratio:
-        1 / 1;
-
-    overflow: hidden;
-
-    border-radius: 16px;
-
-    background:
-        #0d0d10;
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.07
-        );
-}
-
-
-.album-photo-item img,
-.album-photo-image {
-    width: 100% !important;
-
-    height: 100% !important;
-
-    max-width: none !important;
-
-    max-height: none !important;
-
-    object-fit: cover !important;
-
-    object-position: center;
-
-    cursor: zoom-in;
-
-    transition:
-        transform 0.35s ease;
-}
-
-
-.album-photo-item:hover img,
-.album-photo-item:hover
-.album-photo-image {
-    transform:
-        scale(1.045);
-}
-
-
-/* =========================================================
-   37. DELETE PHOTO BUTTON
-========================================================= */
-
-.delete-photo-button,
-.delete-photo-btn {
-    position: absolute;
-
-    top: 8px;
-    right: 8px;
-
-    width: 31px;
-    height: 31px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background:
-        rgba(
-            0,
-            0,
-            0,
-            0.72
-        );
-
-    color: white;
-
-    font-size: 20px;
-
-    line-height: 1;
-
-    opacity: 0;
-
-    transition:
-        opacity 0.2s ease,
-        background 0.2s ease;
-}
-
-
-.album-photo-item:hover
-.delete-photo-button,
-.album-photo-item:hover
-.delete-photo-btn {
-    opacity: 1;
-}
-
-
-.delete-photo-button:hover,
-.delete-photo-btn:hover {
-    background:
-        #ff416d;
-}
-
-
-/* =========================================================
-   38. ADD PHOTO BUTTON
-========================================================= */
-
-.add-photo-album-btn {
-    min-height: 42px;
-
-    padding:
-        0 15px;
-
-    border: 0;
-
-    border-radius: 12px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff4f8b,
-            #ff709f
-        );
-
-    color: white;
-
-    font-size: 12px;
-
-    font-weight: 600;
-}
-
-
-/* =========================================================
-   39. PHOTO PREVIEW FULLSCREEN
-========================================================= */
-
-.photo-preview-viewer {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 10000;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 30px;
-
-    background:
-        rgba(
-            0,
-            0,
-            0,
-            0.92
-        );
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        0.25s ease;
-}
-
-
-.photo-preview-viewer.active {
-    opacity: 1;
-
-    visibility: visible;
-
-    pointer-events: auto;
-}
-
-
-.photo-preview-viewer img {
-    max-width:
-        min(
-            1100px,
-            92vw
-        );
-
-    max-height:
-        88vh;
-
-    width: auto;
-
-    height: auto;
-
-    object-fit: contain;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 30px 100px
-        rgba(
-            0,
-            0,
-            0,
-            0.6
-        );
-}
-
-
-.photo-preview-close {
-    position: absolute;
-
-    top: 22px;
-    right: 22px;
-
-    width: 45px;
-    height: 45px;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.1
-        );
-
-    color: white;
-
-    font-size: 27px;
-
-    line-height: 1;
-}
-
-
-.photo-preview-close:hover {
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.18
-        );
-}
-
-
-/* =========================================================
-   40. EMPTY STATE
-========================================================= */
-
-.empty-state {
-    width: 100%;
-
-    padding:
-        70px 25px;
-
-    text-align: center;
-
-    border:
-        1px dashed
-        rgba(
-            255,
-            255,
-            255,
-            0.1
-        );
-
-    border-radius: 22px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.02
-        );
-}
-
-
-.empty-heart {
-    font-size: 42px;
-
-    margin-bottom: 12px;
-}
-
-
-.empty-state strong {
-    display: block;
-
-    font-size: 18px;
-
-    color: #fff;
-
-    margin-bottom: 7px;
-}
-
-
-.empty-state p {
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.5
-        );
-
-    font-size: 13px;
-
-    line-height: 1.7;
-}
-
-
-/* =========================================================
-   41. LOADING
-========================================================= */
-
-.loading {
-    width: 100%;
-
-    padding:
-        70px 20px;
-
-    text-align: center;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.6
-        );
-
-    font-size: 13px;
-}
-
-
-.loading-heart {
-    display: inline-block;
-
-    font-size: 35px;
-
-    animation:
-        heartBeat 1s
-        infinite;
-}
-
-
-@keyframes heartBeat {
-
-    0%,
-    100% {
-        transform:
-            scale(1);
-    }
-
-    50% {
-        transform:
-            scale(1.2);
-    }
-}
-
-
-/* =========================================================
-   42. ERROR STATE
-========================================================= */
-
-.error-state {
-    border-color:
-        rgba(
-            255,
-            80,
-            110,
-            0.2
-        );
-}
-
-
-.error-state strong {
-    color:
-        #ff6b91;
-}
-
-
-/* =========================================================
-   43. PLAYLIST
-========================================================= */
-
-#playlistModal .modal-content,
-#playlistModal .modal-box {
-    width: min(
-        700px,
-        100%
-    );
-
-    padding:
-        30px;
-}
-
-
-.playlist-list {
+/* =====================================================
+   PLAYLIST
+===================================================== */
+
+.playlist {
     display: flex;
 
     flex-direction: column;
 
     gap: 10px;
-
-    margin-top: 20px;
 }
 
 
-.playlist-item {
-    display: flex;
+.song {
+    display: grid;
+
+    grid-template-columns: 35px 1fr 30px;
 
     align-items: center;
 
-    gap: 14px;
+    gap: 10px;
 
-    padding:
-        14px;
+    background: #202024;
 
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.07
-        );
+    border: 1px solid #2d2d32;
 
-    border-radius: 15px;
+    padding: 15px;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.03
-        );
+    border-radius: 13px;
+
+    color: #aaa;
 }
 
 
-/* =========================================================
-   44. FOOTER
-========================================================= */
+.song div {
+    display: flex;
 
-footer {
-    padding:
-        60px 20px;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.song strong {
+    color: white;
+}
+
+
+.song small {
+    color: #777;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    background: #222226;
+
+    border: 1px solid #3a3a40;
+
+    color: white;
+
+    padding: 14px 20px;
+
+    border-radius: 13px;
+
+    transform:
+        translateY(100px);
+
+    opacity: 0;
+
+    transition: .3s;
+
+    z-index: 2000;
+}
+
+
+.toast.show {
+    transform:
+        translateY(0);
+
+    opacity: 1;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty-state {
+    grid-column: 1 / -1;
 
     text-align: center;
 
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.4
-        );
+    padding: 70px 20px;
 
-    font-size: 12px;
+    border: 1px dashed #303037;
 
-    border-top:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.05
-        );
+    border-radius: 20px;
+
+    color: #77777f;
 }
 
 
-/* =========================================================
-   45. ADMIN ACTIVE
-========================================================= */
+.empty-state .empty-icon {
+    font-size: 45px;
 
-body.admin-active
-.timeline-card {
-    border-color:
-        rgba(
-            255,
-            95,
-            148,
-            0.12
-        );
+    margin-bottom: 15px;
 }
 
 
-body.admin-active
-.timeline-card:hover {
-    border-color:
-        rgba(
-            255,
-            95,
-            148,
-            0.3
-        );
-}
+/* =====================================================
+   RESPONSIVE
+===================================================== */
 
+@media (max-width: 850px) {
 
-/* =========================================================
-   46. RESPONSIVE - TABLET
-========================================================= */
-
-@media (
-    max-width: 900px
-) {
-
-    .timeline-card {
-        grid-template-columns:
-            230px 1fr;
-    }
-
-
-    .timeline-cover,
-    .timeline-cover-wrapper,
-    .timeline-cover-placeholder,
-    .timeline-cover-empty {
-        min-height: 230px;
-    }
-
-
-    .album-photo-grid {
-        grid-template-columns:
-            repeat(
-                3,
-                minmax(
-                    0,
-                    1fr
-                )
-            );
-    }
-
-
-    #albumViewerContent {
-        padding: 24px;
-    }
-}
-
-
-/* =========================================================
-   47. RESPONSIVE - MOBILE
-========================================================= */
-
-@media (
-    max-width: 700px
-) {
-
-    .container,
-    .timeline-section {
-        width:
-            calc(
-                100% - 22px
-            );
-    }
-
-
-    .navbar {
-        width:
-            calc(
-                100% - 22px
-            );
-
-        margin-top: 10px;
-
-        padding:
-            11px 13px;
-
-        border-radius: 16px;
-    }
-
-
-    .navbar-inner {
-        gap: 10px;
-    }
-
-
-    .nav-links {
+    .navbar nav a {
         display: none;
     }
 
 
     .hero {
-        min-height: 570px;
+        grid-template-columns: 1fr;
 
-        padding:
-            80px 18px 100px;
+        text-align: center;
+
+        padding-top: 40px;
+
+        gap: 50px;
     }
 
 
-    .hero-title,
-    #heroTitle,
-    #dynamicText {
-        font-size:
-            clamp(
-                30px,
-                10vw,
-                48px
-            );
+    .hero-content {
+        order: 1;
     }
 
 
-    .time-together {
-        margin-top:
-            -55px;
-
-        margin-bottom:
-            55px;
-
-        grid-template-columns:
-            1fr;
+    .hero-photo {
+        order: 2;
     }
 
 
-    .time-box {
-        padding:
-            20px;
+    .small-title {
+        font-size: 50px;
     }
 
 
-    #timelineList::before {
-        left: 15px;
+    .photo-frame {
+        width: 270px;
+        height: 340px;
     }
 
 
-    .timeline-item {
-        grid-template-columns:
-            32px 1fr;
-
-        gap: 8px;
+    .quick-section {
+        grid-template-columns: 1fr;
     }
 
 
-    .timeline-dot {
-        width: 14px;
-        height: 14px;
-
-        margin-left: 8px;
-
-        margin-top: 20px;
-
-        border-width: 3px;
-    }
-
-
-    .timeline-card {
-        grid-template-columns:
-            1fr;
-
-        border-radius: 20px;
-    }
-
-
-    .timeline-cover-wrapper {
-        height: auto;
-
-        min-height: 0;
-
-        aspect-ratio:
-            16 / 10;
-    }
-
-
-    .timeline-cover,
-    .timeline-cover-placeholder,
-    .timeline-cover-empty {
-        min-height: 0;
-
-        height: 100%;
-
-        aspect-ratio:
-            16 / 10;
-    }
-
-
-    .timeline-body {
-        padding:
-            20px;
-    }
-
-
-    .timeline-title {
-        font-size: 21px;
-    }
-
-
-    .timeline-story {
-        -webkit-line-clamp: 6;
-    }
-
-
-    .timeline-actions {
+    .section-heading {
         flex-direction: column;
 
-        align-items: stretch;
+        align-items: flex-start;
     }
 
 
-    .timeline-actions
-    button {
+    .album-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .timeline::before {
+        left: 12px;
+    }
+
+
+    .timeline-item,
+    .timeline-item:nth-child(even) {
         width: 100%;
+
+        left: 0;
+
+        text-align: left;
+
+        padding-left: 45px;
+
+        padding-right: 0;
     }
 
 
-    /* -----------------------------------------
-       FORM
-    ----------------------------------------- */
-
-    .form-grid {
-        grid-template-columns:
-            1fr;
-
-        gap: 0;
+    .timeline-item:nth-child(odd) {
+        text-align: left;
     }
 
 
-    .form-full {
-        grid-column:
-            auto;
+    .timeline-item:nth-child(odd)
+    .timeline-dot,
+    .timeline-item:nth-child(even)
+    .timeline-dot {
+        left: 6px;
+
+        right: auto;
     }
 
 
-    #addAlbumModal
-    .modal-content,
-    #addAlbumModal
-    .modal-box,
-    #addAlbumModal
-    .add-album-box {
-        padding:
-            20px;
-
-        border-radius: 21px;
+    .timeline-item:nth-child(odd)
+    .timeline-content {
+        text-align: left;
     }
 
-
-    .modal-footer,
-    .form-actions {
-        flex-direction: column-reverse;
-
-        align-items: stretch;
-    }
-
-
-    .modal-footer button,
-    .form-actions button {
-        width: 100%;
-    }
-
-
-    /* -----------------------------------------
-       ALBUM VIEWER
-    ----------------------------------------- */
-
-    #albumViewer {
-        padding: 10px;
-    }
-
-
-    #albumViewerContent {
-        padding: 18px;
-
-        border-radius: 21px;
-
-        max-height:
-            calc(
-                100vh - 20px
-            );
-    }
-
-
-    .album-viewer-header h2 {
-        padding-right: 35px;
-
-        font-size: 26px;
-    }
-
-
-    .album-toolbar {
-        align-items:
-            stretch;
-
-        flex-direction:
-            column;
-    }
-
-
-    .album-toolbar button {
-        width: 100%;
-    }
-
-
-    /* -----------------------------------------
-       FOTO ALBUM
-    ----------------------------------------- */
-
-    .album-photo-grid {
-        grid-template-columns:
-            repeat(
-                2,
-                minmax(
-                    0,
-                    1fr
-                )
-            );
-
-        gap: 9px;
-    }
-
-
-    .album-photo-item {
-        border-radius: 12px;
-    }
-
-
-    .delete-photo-button,
-    .delete-photo-btn {
-        opacity: 1;
-
-        width: 29px;
-        height: 29px;
-    }
-
-
-    /* -----------------------------------------
-       PREVIEW
-    ----------------------------------------- */
-
-    #photoPreview,
-    #previewFoto {
-        grid-template-columns:
-            repeat(
-                2,
-                minmax(
-                    0,
-                    1fr
-                )
-            );
-    }
-
-
-    .photo-preview-viewer {
-        padding:
-            15px;
-    }
-
-
-    .photo-preview-viewer img {
-        max-width:
-            95vw;
-
-        max-height:
-            85vh;
-    }
 }
 
 
-/* =========================================================
-   48. VERY SMALL PHONE
-========================================================= */
+@media (max-width: 550px) {
 
-@media (
-    max-width: 420px
-) {
-
-    .hero {
-        min-height: 520px;
+    .section-container {
+        width: min(100% - 28px, 1080px);
     }
 
 
-    .hero-buttons {
-        flex-direction:
-            column;
+    .hero h1 {
+        font-size: 40px;
     }
 
 
-    .hero-button {
-        width: 100%;
+    .small-title {
+        font-size: 44px;
     }
 
 
-    .timeline-section {
-        padding-top:
-            30px;
+    .section-heading h2 {
+        font-size: 36px;
     }
 
 
-    .timeline-card {
-        border-radius:
-            17px;
+    .album-grid {
+        grid-template-columns: 1fr;
     }
 
 
-    .timeline-body {
-        padding:
-            17px;
+    .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
 
-    .album-photo-grid {
-        gap: 7px;
+    .album-modal-top {
+        flex-direction: column;
+
+        align-items: flex-start;
     }
 
 
-    .album-photo-item {
-        border-radius: 9px;
+    .modal-box {
+        padding: 24px;
     }
 
-
-    #photoPreview,
-    #previewFoto {
-        gap: 8px;
-    }
-}
-
-
-/* =========================================================
-   49. REDUCE MOTION
-========================================================= */
-
-@media (
-    prefers-reduced-motion: reduce
-) {
-
-    *,
-    *::before,
-    *::after {
-        scroll-behavior:
-            auto !important;
-
-        animation-duration:
-            0.01ms !important;
-
-        animation-iteration-count:
-            1 !important;
-
-        transition-duration:
-            0.01ms !important;
-    }
 }
