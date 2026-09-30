@@ -1,7 +1,7 @@
 /* =====================================================
-   UNTUK LILA ❤️
+   UNTUK LILA
    SCRIPT.JS - FINAL VERSION
-   SUPABASE + ALBUM + FOTO
+   SUPABASE ALBUM SYSTEM
 ===================================================== */
 
 
@@ -61,10 +61,6 @@ const heroTexts = [
 let heroTextIndex = 0;
 
 
-/* =====================================================
-   5. HERO TEXT ROTATION
-===================================================== */
-
 function changeHeroText() {
 
     const element =
@@ -103,7 +99,7 @@ setInterval(
 
 
 /* =====================================================
-   6. UTILITY - ESCAPE HTML
+   5. UTILITY
 ===================================================== */
 
 function escapeHTML(value) {
@@ -125,7 +121,7 @@ function escapeHTML(value) {
 
 
 /* =====================================================
-   7. FORMAT DATE
+   6. FORMAT DATE
 ===================================================== */
 
 function formatTanggal(dateValue) {
@@ -135,8 +131,8 @@ function formatTanggal(dateValue) {
     }
 
     /*
-        Untuk menghindari masalah timezone,
-        kita buat tanggal secara manual.
+        Hindari masalah timezone.
+        Kita ambil YYYY-MM-DD langsung.
     */
 
     const parts =
@@ -172,14 +168,6 @@ function formatTanggal(dateValue) {
             day
         );
 
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-        return escapeHTML(dateValue);
-    }
-
     return date.toLocaleDateString(
         "id-ID",
         {
@@ -192,7 +180,7 @@ function formatTanggal(dateValue) {
 
 
 /* =====================================================
-   8. FORM MESSAGE
+   7. MESSAGE
 ===================================================== */
 
 function showMessage(
@@ -220,7 +208,7 @@ function showMessage(
 
 
 /* =====================================================
-   9. TIME TOGETHER
+   8. TIME TOGETHER
 ===================================================== */
 
 function updateTimeTogether() {
@@ -244,22 +232,13 @@ function updateTimeTogether() {
     const days =
         Math.floor(
             difference /
-            (
-                1000 *
-                60 *
-                60 *
-                24
-            )
+            (1000 * 60 * 60 * 24)
         );
 
     const hours =
         Math.floor(
             difference /
-            (
-                1000 *
-                60 *
-                60
-            )
+            (1000 * 60 * 60)
         );
 
     const daysElement =
@@ -300,7 +279,7 @@ setInterval(
 
 
 /* =====================================================
-   10. LOGIN MODAL
+   9. LOGIN MODAL
 ===================================================== */
 
 function openLoginModal() {
@@ -342,47 +321,35 @@ function closeLoginModal() {
 
 
 /* =====================================================
-   11. LOGIN ADMIN
+   10. LOGIN ADMIN
 ===================================================== */
 
 async function loginAdmin(event) {
 
-    if (event) {
-        event.preventDefault();
-    }
+    event.preventDefault();
 
-    const emailElement =
+    const emailInput =
         document.getElementById(
             "loginEmail"
         );
 
-    const passwordElement =
+    const passwordInput =
         document.getElementById(
             "loginPassword"
         );
 
     if (
-        !emailElement ||
-        !passwordElement
+        !emailInput ||
+        !passwordInput
     ) {
         return;
     }
 
     const email =
-        emailElement.value.trim();
+        emailInput.value.trim();
 
     const password =
-        passwordElement.value;
-
-    if (!email || !password) {
-
-        showMessage(
-            "loginMessage",
-            "Email dan password wajib diisi."
-        );
-
-        return;
-    }
+        passwordInput.value;
 
     showMessage(
         "loginMessage",
@@ -396,7 +363,8 @@ async function loginAdmin(event) {
             data,
             error
         } =
-            await supabaseClient.auth
+            await supabaseClient
+                .auth
                 .signInWithPassword({
                     email,
                     password
@@ -409,7 +377,7 @@ async function loginAdmin(event) {
         }
 
         currentUser =
-            data.user || null;
+            data.user;
 
         closeLoginModal();
 
@@ -434,7 +402,7 @@ async function loginAdmin(event) {
 
 
 /* =====================================================
-   12. LOGOUT
+   11. LOGOUT
 ===================================================== */
 
 async function logoutAdmin() {
@@ -445,6 +413,16 @@ async function logoutAdmin() {
             .auth
             .signOut();
 
+        currentUser = null;
+
+        currentAlbum = null;
+
+        updateAdminUI();
+
+        closeAlbumViewer();
+
+        await loadAlbums();
+
     } catch (error) {
 
         console.error(
@@ -452,19 +430,11 @@ async function logoutAdmin() {
             error
         );
     }
-
-    currentUser = null;
-
-    updateAdminUI();
-
-    closeAlbumViewer();
-
-    await loadAlbums();
 }
 
 
 /* =====================================================
-   13. CHECK SESSION
+   12. CHECK SESSION
 ===================================================== */
 
 async function checkLogin() {
@@ -499,7 +469,7 @@ async function checkLogin() {
 
 
 /* =====================================================
-   14. UPDATE ADMIN UI
+   13. UPDATE ADMIN UI
 ===================================================== */
 
 function updateAdminUI() {
@@ -551,7 +521,7 @@ function updateAdminUI() {
 
 
 /* =====================================================
-   15. AUTH STATE LISTENER
+   14. AUTH STATE LISTENER
 ===================================================== */
 
 supabaseClient.auth.onAuthStateChange(
@@ -567,53 +537,7 @@ supabaseClient.auth.onAuthStateChange(
 
 
 /* =====================================================
-   16. GET ALBUM PHOTOS
-===================================================== */
-
-async function getAlbumPhotos(
-    albumId
-) {
-
-    if (!albumId) {
-        return [];
-    }
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("album_photos")
-            .select(
-                "id, album_id, foto_url, created_at"
-            )
-            .eq(
-                "album_id",
-                albumId
-            )
-            .order(
-                "created_at",
-                {
-                    ascending: true
-                }
-            );
-
-    if (error) {
-
-        console.error(
-            "GET ALBUM PHOTOS ERROR:",
-            error
-        );
-
-        return [];
-    }
-
-    return data || [];
-}
-
-
-/* =====================================================
-   17. LOAD ALBUMS
+   15. LOAD ALBUMS
 ===================================================== */
 
 async function loadAlbums() {
@@ -627,15 +551,27 @@ async function loadAlbums() {
         return;
     }
 
-    list.innerHTML =
-        `
+    list.innerHTML = `
         <div class="loading">
-            <div class="loading-heart">❤️</div>
-            <span>Memuat cerita kita...</span>
+            <div class="loading-heart">
+                ❤️
+            </div>
+
+            <p>
+                Memuat cerita kita...
+            </p>
         </div>
-        `;
+    `;
 
     try {
+
+        /*
+            HANYA gunakan kolom yang
+            memang ada di tabel albums.
+
+            Tidak menggunakan:
+            cover_path
+        */
 
         const {
             data,
@@ -644,7 +580,7 @@ async function loadAlbums() {
             await supabaseClient
                 .from("albums")
                 .select(
-                    "id, title, tanggal, lokasi, cerita, cover_url"
+                    "id,title,tanggal,lokasi,cerita,cover_url"
                 )
                 .order(
                     "tanggal",
@@ -673,8 +609,7 @@ async function loadAlbums() {
             error
         );
 
-        list.innerHTML =
-            `
+        list.innerHTML = `
             <div class="empty-state error-state">
 
                 <strong>
@@ -688,13 +623,79 @@ async function loadAlbums() {
                 </p>
 
             </div>
-            `;
+        `;
     }
 }
 
 
 /* =====================================================
-   18. RENDER ALBUMS
+   16. GET ALBUM PHOTOS
+===================================================== */
+
+async function getAlbumPhotos(
+    albumId
+) {
+
+    try {
+
+        /*
+            PENTING:
+
+            HANYA mengambil:
+            id
+            album_id
+            foto_url
+            created_at
+
+            TIDAK menggunakan foto_path.
+        */
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("album_photos")
+                .select(
+                    "id,album_id,foto_url,created_at"
+                )
+                .eq(
+                    "album_id",
+                    albumId
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: true
+                    }
+                );
+
+        if (error) {
+
+            console.error(
+                "LOAD PHOTO ERROR:",
+                error
+            );
+
+            return [];
+        }
+
+        return data || [];
+
+    } catch (error) {
+
+        console.error(
+            "GET PHOTOS ERROR:",
+            error
+        );
+
+        return [];
+    }
+}
+
+
+/* =====================================================
+   17. RENDER ALBUMS
 ===================================================== */
 
 async function renderAlbums(
@@ -712,8 +713,7 @@ async function renderAlbums(
 
     if (!albums.length) {
 
-        list.innerHTML =
-            `
+        list.innerHTML = `
             <div class="empty-state">
 
                 <div class="empty-heart">
@@ -730,7 +730,7 @@ async function renderAlbums(
                 </p>
 
             </div>
-            `;
+        `;
 
         return;
     }
@@ -738,43 +738,49 @@ async function renderAlbums(
     list.innerHTML = "";
 
     /*
-        Ambil semua foto secara bersamaan
-        supaya timeline lebih cepat.
+        Kita ambil foto setiap album
+        untuk mendapatkan cover.
+
+        Promise.all membuat proses
+        lebih cepat dibanding satu per satu.
     */
 
-    const photoResults =
+    const albumCards =
         await Promise.all(
+
             albums.map(
-                album =>
-                    getAlbumPhotos(
-                        album.id
-                    )
+                async album => {
+
+                    const photos =
+                        await getAlbumPhotos(
+                            album.id
+                        );
+
+                    const firstPhoto =
+                        photos.length > 0
+                            ? photos[0].foto_url
+                            : (
+                                album.cover_url ||
+                                ""
+                            );
+
+                    return {
+                        album,
+                        firstPhoto,
+                        photoCount:
+                            photos.length
+                    };
+                }
             )
         );
 
-    albums.forEach(
-        (
+
+    albumCards.forEach(
+        ({
             album,
-            index
-        ) => {
-
-            const photos =
-                photoResults[index] || [];
-
-            /*
-                PRIORITAS COVER:
-
-                1. cover_url
-                2. foto pertama
-            */
-
-            const firstPhoto =
-                album.cover_url ||
-                (
-                    photos.length
-                        ? photos[0].foto_url
-                        : ""
-                );
+            firstPhoto,
+            photoCount
+        }) => {
 
             const item =
                 document.createElement(
@@ -784,22 +790,23 @@ async function renderAlbums(
             item.className =
                 "timeline-item";
 
+
             const title =
                 album.title ||
                 "Tanpa Judul";
 
-            item.innerHTML =
-                `
+
+            item.innerHTML = `
                 <div class="timeline-dot"></div>
 
                 <div class="timeline-card">
 
-                    ${
-                        firstPhoto
-                        ?
-                        `
-                        <div class="timeline-cover-wrap">
+                    <div class="timeline-cover-wrapper">
 
+                        ${
+                            firstPhoto
+                            ?
+                            `
                             <img
                                 class="timeline-cover"
                                 src="${escapeHTML(
@@ -811,27 +818,32 @@ async function renderAlbums(
                                 loading="lazy"
                                 onerror="
                                     this.style.display='none';
-                                    this.parentElement.classList.add('cover-error');
+                                    this.parentElement.classList.add('no-image');
                                 "
                             >
-
-                            <div class="cover-error-placeholder">
-                                ❤️
-                            </div>
-
-                        </div>
-                        `
-                        :
-                        `
-                        <div class="timeline-cover-wrap no-photo">
-
+                            `
+                            :
+                            `
                             <div class="timeline-cover-placeholder">
                                 ❤️
                             </div>
+                            `
+                        }
 
-                        </div>
-                        `
-                    }
+                        ${
+                            photoCount > 0
+                            ?
+                            `
+                            <div class="photo-count">
+                                📷 ${photoCount}
+                            </div>
+                            `
+                            :
+                            ""
+                        }
+
+                    </div>
+
 
                     <div class="timeline-body">
 
@@ -841,18 +853,20 @@ async function renderAlbums(
                             )}
                         </div>
 
+
                         <h3 class="timeline-title">
                             ${escapeHTML(
                                 title
                             )}
                         </h3>
 
+
                         ${
                             album.lokasi
                             ?
                             `
                             <div class="timeline-location">
-                                <span>📍</span>
+                                📍
                                 ${escapeHTML(
                                     album.lokasi
                                 )}
@@ -861,6 +875,7 @@ async function renderAlbums(
                             :
                             ""
                         }
+
 
                         ${
                             album.cerita
@@ -876,26 +891,10 @@ async function renderAlbums(
                             ""
                         }
 
-                        <div class="timeline-photo-count">
-
-                            <span>📷</span>
-
-                            ${
-                                photos.length
-                            }
-
-                            ${
-                                photos.length === 1
-                                    ? "foto"
-                                    : "foto"
-                            }
-
-                        </div>
 
                         <div class="timeline-actions">
 
                             <button
-                                type="button"
                                 class="primary-button"
                                 onclick="openAlbum('${escapeHTML(
                                     album.id
@@ -904,12 +903,12 @@ async function renderAlbums(
                                 Buka Album ❤️
                             </button>
 
+
                             ${
                                 currentUser
                                 ?
                                 `
                                 <button
-                                    type="button"
                                     class="secondary-button"
                                     onclick="hapusAlbum('${escapeHTML(
                                         album.id
@@ -927,25 +926,24 @@ async function renderAlbums(
                     </div>
 
                 </div>
-                `;
+            `;
 
-            list.appendChild(item);
+
+            list.appendChild(
+                item
+            );
         }
     );
 }
 
 
 /* =====================================================
-   19. OPEN ALBUM
+   18. OPEN ALBUM
 ===================================================== */
 
 async function openAlbum(
     albumId
 ) {
-
-    if (!albumId) {
-        return;
-    }
 
     const viewer =
         document.getElementById(
@@ -965,24 +963,19 @@ async function openAlbum(
         "hidden"
     );
 
-    document.body.classList.add(
-        "modal-open"
-    );
-
-    content.innerHTML =
-        `
-        <div class="loading album-loading">
+    content.innerHTML = `
+        <div class="loading">
 
             <div class="loading-heart">
                 ❤️
             </div>
 
-            <span>
+            <p>
                 Membuka album...
-            </span>
+            </p>
 
         </div>
-        `;
+    `;
 
     try {
 
@@ -993,7 +986,7 @@ async function openAlbum(
             await supabaseClient
                 .from("albums")
                 .select(
-                    "id, title, tanggal, lokasi, cerita, cover_url"
+                    "id,title,tanggal,lokasi,cerita,cover_url"
                 )
                 .eq(
                     "id",
@@ -1002,6 +995,7 @@ async function openAlbum(
                 .single();
 
         if (albumError) {
+
             throw new Error(
                 albumError.message
             );
@@ -1030,8 +1024,7 @@ async function openAlbum(
             error
         );
 
-        content.innerHTML =
-            `
+        content.innerHTML = `
             <div class="empty-state error-state">
 
                 <strong>
@@ -1045,13 +1038,13 @@ async function openAlbum(
                 </p>
 
             </div>
-            `;
+        `;
     }
 }
 
 
 /* =====================================================
-   20. RENDER ALBUM VIEWER
+   19. RENDER ALBUM VIEWER
 ===================================================== */
 
 function renderAlbumViewer(
@@ -1072,6 +1065,7 @@ function renderAlbumViewer(
         album.title ||
         "Tanpa Judul";
 
+
     const cover =
         album.cover_url ||
         (
@@ -1080,8 +1074,8 @@ function renderAlbumViewer(
                 : ""
         );
 
-    content.innerHTML =
-        `
+
+    content.innerHTML = `
         <div class="album-viewer-header">
 
             ${
@@ -1105,52 +1099,53 @@ function renderAlbumViewer(
                 ""
             }
 
-            <div class="album-viewer-info">
 
-                <div class="album-viewer-date">
-                    ${formatTanggal(
-                        album.tanggal
-                    )}
-                </div>
-
-                <h2>
-                    ${escapeHTML(
-                        title
-                    )}
-                </h2>
-
-                ${
-                    album.lokasi
-                    ?
-                    `
-                    <div class="album-viewer-location">
-                        📍
-                        ${escapeHTML(
-                            album.lokasi
-                        )}
-                    </div>
-                    `
-                    :
-                    ""
-                }
-
-                ${
-                    album.cerita
-                    ?
-                    `
-                    <div class="album-viewer-story">
-                        ${escapeHTML(
-                            album.cerita
-                        )}
-                    </div>
-                    `
-                    :
-                    ""
-                }
-
+            <div class="album-viewer-date">
+                ${formatTanggal(
+                    album.tanggal
+                )}
             </div>
 
+
+            <h2>
+                ${escapeHTML(
+                    title
+                )}
+            </h2>
+
+
+            ${
+                album.lokasi
+                ?
+                `
+                <div class="album-viewer-location">
+                    📍
+                    ${escapeHTML(
+                        album.lokasi
+                    )}
+                </div>
+                `
+                :
+                ""
+            }
+
+
+            ${
+                album.cerita
+                ?
+                `
+                <div class="album-viewer-story">
+                    ${escapeHTML(
+                        album.cerita
+                    )}
+                </div>
+                `
+                :
+                ""
+            }
+
         </div>
+
 
         <div class="album-toolbar">
 
@@ -1162,35 +1157,35 @@ function renderAlbumViewer(
 
                 <span>
                     ${photos.length}
-                    ${
-                        photos.length === 1
-                            ? "foto"
-                            : "foto"
-                    }
+                    foto
                 </span>
 
             </div>
+
 
             ${
                 currentUser
                 ?
                 `
-                <button
-                    type="button"
-                    class="primary-button"
-                    onclick="triggerAddPhotos()"
-                >
-                    + Tambahkan Foto
-                </button>
+                <div>
 
-                <input
-                    id="additionalPhotos"
-                    type="file"
-                    accept="image/*"
-                    multiple
-                    hidden
-                    onchange="addPhotosToCurrentAlbum(event)"
-                >
+                    <button
+                        class="primary-button"
+                        onclick="triggerAddPhotos()"
+                    >
+                        + Tambahkan Foto
+                    </button>
+
+                    <input
+                        id="additionalPhotos"
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        hidden
+                        onchange="addPhotosToCurrentAlbum(event)"
+                    >
+
+                </div>
                 `
                 :
                 ""
@@ -1198,60 +1193,66 @@ function renderAlbumViewer(
 
         </div>
 
+
         <div class="album-photo-grid">
 
             ${
                 photos.length
                 ?
-                photos.map(
-                    photo =>
-                    `
-                    <div
-                        class="album-photo-item"
-                    >
+                photos
+                    .map(
+                        photo => {
 
-                        <img
-                            src="${escapeHTML(
-                                photo.foto_url
-                            )}"
-                            alt="Foto kenangan"
-                            onclick="previewPhoto('${escapeHTML(
-                                photo.foto_url
-                            )}')"
-                            loading="lazy"
-                            onerror="
-                                this.parentElement.classList.add('image-error');
-                            "
-                        >
+                            return `
+                                <div
+                                    class="album-photo-item"
+                                >
 
-                        ${
-                            currentUser
-                            ?
-                            `
-                            <button
-                                type="button"
-                                class="delete-photo-button"
-                                onclick="hapusFotoAlbum('${escapeHTML(
-                                    photo.id
-                                )}', '${escapeHTML(
-                                    photo.foto_url
-                                )}')"
-                                title="Hapus foto"
-                            >
-                                ×
-                            </button>
-                            `
-                            :
-                            ""
+                                    <img
+                                        src="${escapeHTML(
+                                            photo.foto_url
+                                        )}"
+                                        alt="Foto kenangan"
+                                        onclick="previewPhoto('${escapeHTML(
+                                            photo.foto_url
+                                        )}')"
+                                        loading="lazy"
+                                    >
+
+
+                                    ${
+                                        currentUser
+                                        ?
+                                        `
+                                        <button
+                                            class="delete-photo-button"
+                                            onclick="hapusFotoAlbum(
+                                                '${escapeHTML(
+                                                    photo.id
+                                                )}',
+                                                '${escapeHTML(
+                                                    photo.foto_url
+                                                )}'
+                                            )"
+                                            title="Hapus foto"
+                                        >
+                                            ×
+                                        </button>
+                                        `
+                                        :
+                                        ""
+                                    }
+
+                                </div>
+                            `;
                         }
-
-                    </div>
-                    `
-                ).join("")
+                    )
+                    .join("")
                 :
                 `
                 <div
-                    class="empty-state album-empty"
+                    class="empty-state"
+                    style="grid-column:1/-1"
                 >
 
                     <div class="empty-heart">
@@ -1277,12 +1278,12 @@ function renderAlbumViewer(
             }
 
         </div>
-        `;
+    `;
 }
 
 
 /* =====================================================
-   21. CLOSE ALBUM VIEWER
+   20. CLOSE ALBUM VIEWER
 ===================================================== */
 
 function closeAlbumViewer() {
@@ -1294,10 +1295,6 @@ function closeAlbumViewer() {
         ?.classList
         .add("hidden");
 
-    document.body.classList.remove(
-        "modal-open"
-    );
-
     currentAlbum =
         null;
 
@@ -1307,7 +1304,7 @@ function closeAlbumViewer() {
 
 
 /* =====================================================
-   22. PREVIEW PHOTO
+   21. PREVIEW PHOTO
 ===================================================== */
 
 function previewPhoto(
@@ -1326,20 +1323,19 @@ function previewPhoto(
 
     if (!win) {
         alert(
-            "Popup diblokir browser. Izinkan popup untuk melihat foto."
+            "Browser memblokir jendela baru."
         );
 
         return;
     }
 
-    const safeUrl =
+    const safeURL =
         escapeHTML(url);
 
-    win.document.write(
-        `
+    win.document.write(`
         <!DOCTYPE html>
 
-        <html lang="id">
+        <html>
 
         <head>
 
@@ -1352,32 +1348,34 @@ function previewPhoto(
             <style>
 
                 * {
-                    box-sizing:border-box;
+                    box-sizing: border-box;
                 }
 
                 html,
                 body {
-                    margin:0;
-                    width:100%;
-                    height:100%;
-                    background:#050507;
+                    width: 100%;
+                    height: 100%;
+                    margin: 0;
+                    background: #050507;
                 }
 
                 body {
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    padding:20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 25px;
                 }
 
                 img {
-                    max-width:95vw;
-                    max-height:95vh;
-                    width:auto;
-                    height:auto;
-                    object-fit:contain;
-                    border-radius:18px;
-                    box-shadow:0 20px 60px rgba(0,0,0,.6);
+                    max-width: 95vw;
+                    max-height: 92vh;
+                    width: auto;
+                    height: auto;
+                    object-fit: contain;
+                    border-radius: 18px;
+                    box-shadow:
+                        0 20px 80px
+                        rgba(255, 70, 130, .25);
                 }
 
             </style>
@@ -1387,22 +1385,21 @@ function previewPhoto(
         <body>
 
             <img
-                src="${safeUrl}"
+                src="${safeURL}"
                 alt="Foto Kenangan"
             >
 
         </body>
 
         </html>
-        `
-    );
+    `);
 
     win.document.close();
 }
 
 
 /* =====================================================
-   23. OPEN ADD ALBUM MODAL
+   22. ADD ALBUM MODAL
 ===================================================== */
 
 function openAddAlbumModal() {
@@ -1427,24 +1424,45 @@ function openAddAlbumModal() {
         "hidden"
     );
 
-    document.body.classList.add(
-        "modal-open"
-    );
+    /*
+        Set tanggal default
+        hanya kalau masih kosong.
+    */
 
-    setTimeout(() => {
+    const dateInput =
+        document.getElementById(
+            "albumDate"
+        );
 
-        document
-            .getElementById(
-                "albumTitle"
-            )
-            ?.focus();
+    if (
+        dateInput &&
+        !dateInput.value
+    ) {
 
-    }, 100);
+        const today =
+            new Date();
+
+        const year =
+            today.getFullYear();
+
+        const month =
+            String(
+                today.getMonth() + 1
+            ).padStart(2, "0");
+
+        const day =
+            String(
+                today.getDate()
+            ).padStart(2, "0");
+
+        dateInput.value =
+            `${year}-${month}-${day}`;
+    }
 }
 
 
 /* =====================================================
-   24. CLOSE ADD ALBUM MODAL
+   23. CLOSE ADD ALBUM MODAL
 ===================================================== */
 
 function closeAddAlbumModal() {
@@ -1456,15 +1474,14 @@ function closeAddAlbumModal() {
         ?.classList
         .add("hidden");
 
-    document.body.classList.remove(
-        "modal-open"
-    );
-
-    document
-        .getElementById(
+    const form =
+        document.getElementById(
             "albumForm"
-        )
-        ?.reset();
+        );
+
+    if (form) {
+        form.reset();
+    }
 
     const preview =
         document.getElementById(
@@ -1477,13 +1494,14 @@ function closeAddAlbumModal() {
 
     showMessage(
         "albumMessage",
-        ""
+        "",
+        "info"
     );
 }
 
 
 /* =====================================================
-   25. PHOTO PREVIEW BEFORE UPLOAD
+   24. PREVIEW ALBUM PHOTOS
 ===================================================== */
 
 document.addEventListener(
@@ -1518,7 +1536,7 @@ document.addEventListener(
         }
 
         files.forEach(
-            file => {
+            (file, index) => {
 
                 if (
                     !file.type.startsWith(
@@ -1542,13 +1560,24 @@ document.addEventListener(
                         item.className =
                             "photo-preview-item";
 
-                        item.innerHTML =
-                            `
+                        item.innerHTML = `
                             <img
                                 src="${readerEvent.target.result}"
-                                alt="Preview"
+                                alt="Preview ${index + 1}"
                             >
-                            `;
+
+                            ${
+                                index === 0
+                                ?
+                                `
+                                <span class="cover-badge">
+                                    COVER
+                                </span>
+                                `
+                                :
+                                ""
+                            }
+                        `;
 
                         preview.appendChild(
                             item
@@ -1565,7 +1594,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   26. CREATE ALBUM
+   25. CREATE ALBUM
 ===================================================== */
 
 async function tambahAlbum(
@@ -1583,22 +1612,22 @@ async function tambahAlbum(
         return;
     }
 
-    const titleElement =
+    const titleInput =
         document.getElementById(
             "albumTitle"
         );
 
-    const dateElement =
+    const dateInput =
         document.getElementById(
             "albumDate"
         );
 
-    const locationElement =
+    const locationInput =
         document.getElementById(
             "albumLocation"
         );
 
-    const storyElement =
+    const storyInput =
         document.getElementById(
             "albumStory"
         );
@@ -1608,29 +1637,39 @@ async function tambahAlbum(
             "albumPhotos"
         );
 
+    const button =
+        document.getElementById(
+            "saveAlbumButton"
+        );
+
+
+    if (
+        !titleInput ||
+        !dateInput ||
+        !locationInput ||
+        !storyInput
+    ) {
+        return;
+    }
+
+
     const title =
-        titleElement
-            ?.value
-            .trim() || "";
+        titleInput.value.trim();
 
     const tanggal =
-        dateElement
-            ?.value || "";
+        dateInput.value;
 
     const lokasi =
-        locationElement
-            ?.value
-            .trim() || "";
+        locationInput.value.trim();
 
     const cerita =
-        storyElement
-            ?.value
-            .trim() || "";
+        storyInput.value.trim();
 
     const files =
         Array.from(
             photoInput?.files || []
         );
+
 
     if (!title) {
 
@@ -1642,6 +1681,7 @@ async function tambahAlbum(
         return;
     }
 
+
     if (!tanggal) {
 
         showMessage(
@@ -1652,28 +1692,54 @@ async function tambahAlbum(
         return;
     }
 
+
     /*
-        HTML date input otomatis memberikan:
-
-        YYYY-MM-DD
-
-        Contoh:
-
-        2024-04-24
+        Batasi ukuran foto
+        maksimal 10 MB per foto.
     */
 
-    const button =
-        document.getElementById(
-            "saveAlbumButton"
-        );
+    const maxSize =
+        10 * 1024 * 1024;
+
+    for (const file of files) {
+
+        if (
+            !file.type.startsWith(
+                "image/"
+            )
+        ) {
+
+            showMessage(
+                "albumMessage",
+                `File "${file.name}" bukan gambar.`
+            );
+
+            return;
+        }
+
+        if (
+            file.size > maxSize
+        ) {
+
+            showMessage(
+                "albumMessage",
+                `Foto "${file.name}" terlalu besar. Maksimal 10 MB.`
+            );
+
+            return;
+        }
+    }
+
 
     if (button) {
 
-        button.disabled = true;
+        button.disabled =
+            true;
 
         button.textContent =
             "Membuat album...";
     }
+
 
     showMessage(
         "albumMessage",
@@ -1681,13 +1747,18 @@ async function tambahAlbum(
         "info"
     );
 
+
     let createdAlbum = null;
+
 
     try {
 
         /* =================================================
            STEP 1
-           CREATE ALBUM
+           INSERT ALBUM
+
+           TIDAK ADA:
+           cover_path
         ================================================= */
 
         const {
@@ -1697,41 +1768,47 @@ async function tambahAlbum(
             await supabaseClient
                 .from("albums")
                 .insert({
-                    title: title,
-                    tanggal: tanggal,
+                    title:
+                        title,
+
+                    tanggal:
+                        tanggal,
+
                     lokasi:
                         lokasi || null,
+
                     cerita:
                         cerita || null,
+
                     cover_url:
                         null
                 })
                 .select(
-                    "id, title, tanggal, lokasi, cerita, cover_url"
+                    "id,title,tanggal,lokasi,cerita,cover_url"
                 )
                 .single();
 
-        if (albumError) {
 
-            console.error(
-                "CREATE ALBUM ERROR:",
-                albumError
-            );
+        if (albumError) {
 
             throw new Error(
                 albumError.message
             );
         }
 
+
         createdAlbum =
             album;
 
+
         /* =================================================
            STEP 2
-           UPLOAD FOTO
+           UPLOAD PHOTOS
         ================================================= */
 
-        let uploadedPhotos = [];
+        let uploadedPhotos =
+            [];
+
 
         if (files.length > 0) {
 
@@ -1742,9 +1819,13 @@ async function tambahAlbum(
                 );
         }
 
+
         /* =================================================
            STEP 3
            SET COVER URL
+
+           HANYA menggunakan cover_url.
+           TIDAK menggunakan cover_path.
         ================================================= */
 
         if (
@@ -1753,6 +1834,7 @@ async function tambahAlbum(
 
             const firstPhoto =
                 uploadedPhotos[0];
+
 
             const {
                 error:
@@ -1769,31 +1851,16 @@ async function tambahAlbum(
                         album.id
                     );
 
+
             if (coverError) {
 
-                /*
-                    Jangan batalkan album hanya
-                    karena cover_url gagal.
-
-                    Timeline tetap bisa menggunakan
-                    foto pertama dari album_photos.
-                */
-
-                console.warn(
-                    "COVER UPDATE WARNING:",
+                console.error(
+                    "COVER UPDATE ERROR:",
                     coverError
                 );
-
-            } else {
-
-                createdAlbum.cover_url =
-                    firstPhoto.foto_url;
             }
         }
 
-        /* =================================================
-           SUCCESS
-        ================================================= */
 
         showMessage(
             "albumMessage",
@@ -1801,10 +1868,6 @@ async function tambahAlbum(
             "success"
         );
 
-        /*
-            Tunggu sebentar supaya pesan
-            berhasil terlihat.
-        */
 
         setTimeout(
             async () => {
@@ -1817,12 +1880,45 @@ async function tambahAlbum(
             700
         );
 
+
     } catch (error) {
 
         console.error(
             "TAMBAH ALBUM ERROR:",
             error
         );
+
+
+        /*
+            Kalau album berhasil dibuat
+            tetapi upload foto gagal,
+            hapus album agar tidak ada
+            album kosong yang tidak sengaja.
+        */
+
+        if (createdAlbum) {
+
+            try {
+
+                await supabaseClient
+                    .from("albums")
+                    .delete()
+                    .eq(
+                        "id",
+                        createdAlbum.id
+                    );
+
+            } catch (
+                cleanupError
+            ) {
+
+                console.error(
+                    "CLEANUP ERROR:",
+                    cleanupError
+                );
+            }
+        }
+
 
         showMessage(
             "albumMessage",
@@ -1845,7 +1941,7 @@ async function tambahAlbum(
 
 
 /* =====================================================
-   27. UPLOAD ALBUM PHOTOS
+   26. UPLOAD ALBUM PHOTOS
 ===================================================== */
 
 async function uploadAlbumPhotos(
@@ -1855,287 +1951,286 @@ async function uploadAlbumPhotos(
 
     const photoRows = [];
 
-    /*
-        Menyimpan path Storage hanya
-        sementara di JavaScript.
 
-        Path TIDAK disimpan ke database.
+    for (
+        let i = 0;
+        i < files.length;
+        i++
+    ) {
 
-        Ini sesuai struktur database baru.
-    */
+        const file =
+            files[i];
 
-    const uploadedStoragePaths = [];
+
+        if (
+            !file.type.startsWith(
+                "image/"
+            )
+        ) {
+            continue;
+        }
+
+
+        /*
+            Nama file aman.
+        */
+
+        const extension =
+            file.name
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+
+        const baseName =
+            file.name
+                .replace(
+                    /\.[^/.]+$/,
+                    ""
+                )
+                .replace(
+                    /[^a-zA-Z0-9_-]/g,
+                    "-"
+                )
+                .substring(
+                    0,
+                    80
+                );
+
+
+        const fileName =
+            `${Date.now()}-${i}-${baseName}.${extension}`;
+
+
+        /*
+            Folder berdasarkan UUID album.
+
+            Contoh:
+
+            UUID/
+            foto-1.jpg
+            foto-2.jpg
+        */
+
+        const filePath =
+            `${albumId}/${fileName}`;
+
+
+        /* =================================================
+           UPLOAD STORAGE
+        ================================================= */
+
+        const {
+            data: uploadData,
+            error: uploadError
+        } =
+            await supabaseClient
+                .storage
+                .from(
+                    STORAGE_BUCKET
+                )
+                .upload(
+                    filePath,
+                    file,
+                    {
+                        cacheControl:
+                            "3600",
+
+                        upsert:
+                            false,
+
+                        contentType:
+                            file.type
+                    }
+                );
+
+
+        if (uploadError) {
+
+            console.error(
+                "STORAGE UPLOAD ERROR:",
+                uploadError
+            );
+
+            throw new Error(
+                "Upload foto gagal: " +
+                uploadError.message
+            );
+        }
+
+
+        /*
+            Ambil public URL.
+
+            Kita TIDAK menyimpan
+            filePath ke database.
+        */
+
+        const {
+            data:
+                publicUrlData
+        } =
+            supabaseClient
+                .storage
+                .from(
+                    STORAGE_BUCKET
+                )
+                .getPublicUrl(
+                    uploadData.path
+                );
+
+
+        const publicUrl =
+            publicUrlData.publicUrl;
+
+
+        /*
+            HANYA masukkan kolom:
+
+            album_id
+            foto_url
+
+            TIDAK:
+            foto_path
+        */
+
+        photoRows.push({
+            album_id:
+                albumId,
+
+            foto_url:
+                publicUrl
+        });
+    }
+
+
+    /* =================================================
+       INSERT PHOTO DATABASE
+    ================================================= */
+
+    if (
+        photoRows.length > 0
+    ) {
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from(
+                    "album_photos"
+                )
+                .insert(
+                    photoRows
+                );
+
+
+        if (error) {
+
+            console.error(
+                "INSERT PHOTO ERROR:",
+                error
+            );
+
+
+            /*
+                Foto sudah terupload
+                ke Storage tetapi database gagal.
+
+                Kita coba hapus file dari Storage
+                dengan mengambil path dari URL.
+            */
+
+            for (
+                const photo
+                of photoRows
+            ) {
+
+                const path =
+                    extractStoragePath(
+                        photo.foto_url
+                    );
+
+                if (path) {
+
+                    await supabaseClient
+                        .storage
+                        .from(
+                            STORAGE_BUCKET
+                        )
+                        .remove([
+                            path
+                        ]);
+                }
+            }
+
+
+            throw new Error(
+                "Foto gagal disimpan: " +
+                error.message
+            );
+        }
+    }
+
+
+    return photoRows;
+}
+
+
+/* =====================================================
+   27. EXTRACT STORAGE PATH FROM URL
+===================================================== */
+
+/*
+    Karena database tidak mempunyai
+    kolom foto_path, kita mengambil
+    path langsung dari foto_url
+    ketika perlu menghapus file.
+
+    Contoh URL:
+
+    https://xxxx.supabase.co/storage/v1/object/public/
+    ALBUM-PHOTOS/UUID/foto.jpg
+
+    hasil:
+
+    UUID/foto.jpg
+*/
+
+function extractStoragePath(
+    publicUrl
+) {
+
+    if (!publicUrl) {
+        return null;
+    }
 
     try {
 
-        for (
-            let i = 0;
-            i < files.length;
-            i++
-        ) {
+        const marker =
+            `/storage/v1/object/public/${STORAGE_BUCKET}/`;
 
-            const file =
-                files[i];
-
-            if (
-                !file.type.startsWith(
-                    "image/"
-                )
-            ) {
-                continue;
-            }
-
-            /*
-                Batasi ukuran file.
-                10 MB per foto.
-            */
-
-            const maxSize =
-                10 * 1024 * 1024;
-
-            if (
-                file.size > maxSize
-            ) {
-
-                throw new Error(
-                    `Foto "${file.name}" terlalu besar. Maksimal 10 MB.`
-                );
-            }
-
-            /*
-                Extension
-            */
-
-            const extension =
-                file.name
-                    .split(".")
-                    .pop()
-                    .toLowerCase();
-
-            /*
-                Nama file aman
-            */
-
-            const safeName =
-                file.name
-                    .replace(
-                        /[^a-zA-Z0-9._-]/g,
-                        "-"
-                    )
-                    .replace(
-                        /-+/g,
-                        "-"
-                    );
-
-            /*
-                Nama unik
-            */
-
-            const uniqueId =
-                typeof crypto !== "undefined" &&
-                crypto.randomUUID
-                    ? crypto.randomUUID()
-                    : (
-                        Date.now() +
-                        "-" +
-                        Math.random()
-                            .toString(36)
-                            .substring(2)
-                    );
-
-            const fileName =
-                uniqueId +
-                "-" +
-                i +
-                "-" +
-                safeName;
-
-            /*
-                Path Storage:
-
-                UUID album /
-                nama-file
-            */
-
-            const filePath =
-                String(albumId) +
-                "/" +
-                fileName;
-
-            /* =================================================
-               UPLOAD STORAGE
-            ================================================= */
-
-            const {
-                data: uploadData,
-                error: uploadError
-            } =
-                await supabaseClient
-                    .storage
-                    .from(
-                        STORAGE_BUCKET
-                    )
-                    .upload(
-                        filePath,
-                        file,
-                        {
-                            cacheControl:
-                                "3600",
-
-                            upsert:
-                                false,
-
-                            contentType:
-                                file.type
-                        }
-                    );
-
-            if (uploadError) {
-
-                console.error(
-                    "STORAGE UPLOAD ERROR:",
-                    uploadError
-                );
-
-                throw new Error(
-                    "Upload foto gagal: " +
-                    uploadError.message
-                );
-            }
-
-            const uploadedPath =
-                uploadData?.path ||
-                filePath;
-
-            uploadedStoragePaths.push(
-                uploadedPath
+        const index =
+            publicUrl.indexOf(
+                marker
             );
 
-            /* =================================================
-               GET PUBLIC URL
-            ================================================= */
-
-            const {
-                data:
-                    publicUrlData
-            } =
-                supabaseClient
-                    .storage
-                    .from(
-                        STORAGE_BUCKET
-                    )
-                    .getPublicUrl(
-                        uploadedPath
-                    );
-
-            const publicUrl =
-                publicUrlData?.publicUrl;
-
-            if (!publicUrl) {
-
-                throw new Error(
-                    "URL foto tidak berhasil dibuat."
-                );
-            }
-
-            /*
-                =================================================
-                PENTING
-
-                HANYA kolom berikut yang dikirim:
-
-                album_id
-                foto_url
-
-                TIDAK ADA:
-
-                foto_path
-                =================================================
-            */
-
-            photoRows.push({
-                album_id:
-                    albumId,
-
-                foto_url:
-                    publicUrl
-            });
+        if (index === -1) {
+            return null;
         }
 
-        /* =================================================
-           INSERT FOTO KE DATABASE
-        ================================================= */
-
-        if (
-            photoRows.length > 0
-        ) {
-
-            const {
-                error:
-                    photoInsertError
-            } =
-                await supabaseClient
-                    .from(
-                        "album_photos"
-                    )
-                    .insert(
-                        photoRows
-                    );
-
-            if (
-                photoInsertError
-            ) {
-
-                console.error(
-                    "PHOTO DATABASE ERROR:",
-                    photoInsertError
-                );
-
-                throw new Error(
-                    "Foto gagal disimpan: " +
-                    photoInsertError.message
-                );
-            }
-        }
-
-        return photoRows;
+        return publicUrl.substring(
+            index +
+            marker.length
+        );
 
     } catch (error) {
 
-        /*
-            Jika database gagal setelah
-            file berhasil masuk Storage,
-            hapus file Storage yang tadi
-            berhasil diupload.
-        */
+        console.error(
+            "EXTRACT STORAGE PATH ERROR:",
+            error
+        );
 
-        if (
-            uploadedStoragePaths.length
-        ) {
-
-            try {
-
-                await supabaseClient
-                    .storage
-                    .from(
-                        STORAGE_BUCKET
-                    )
-                    .remove(
-                        uploadedStoragePaths
-                    );
-
-            } catch (
-                cleanupError
-            ) {
-
-                console.warn(
-                    "CLEANUP STORAGE ERROR:",
-                    cleanupError
-                );
-            }
-        }
-
-        throw error;
+        return null;
     }
 }
 
@@ -2175,6 +2270,7 @@ async function addPhotosToCurrentAlbum(
         return;
     }
 
+
     if (!currentAlbum) {
 
         alert(
@@ -2184,14 +2280,57 @@ async function addPhotosToCurrentAlbum(
         return;
     }
 
+
     const files =
         Array.from(
             event.target.files || []
         );
 
+
     if (!files.length) {
         return;
     }
+
+
+    const maxSize =
+        10 * 1024 * 1024;
+
+
+    for (
+        const file
+        of files
+    ) {
+
+        if (
+            !file.type.startsWith(
+                "image/"
+            )
+        ) {
+
+            alert(
+                `"${file.name}" bukan gambar.`
+            );
+
+            event.target.value = "";
+
+            return;
+        }
+
+
+        if (
+            file.size > maxSize
+        ) {
+
+            alert(
+                `"${file.name}" terlalu besar. Maksimal 10 MB.`
+            );
+
+            event.target.value = "";
+
+            return;
+        }
+    }
+
 
     try {
 
@@ -2201,9 +2340,6 @@ async function addPhotosToCurrentAlbum(
                 files
             );
 
-        /*
-            Tambahkan foto ke cache.
-        */
 
         albumPhotosCache =
             [
@@ -2211,54 +2347,64 @@ async function addPhotosToCurrentAlbum(
                 ...newPhotos
             ];
 
+
         /*
-            Jika album belum memiliki cover,
+            Jika album belum mempunyai cover,
             gunakan foto pertama.
         */
 
         if (
             !currentAlbum.cover_url &&
-            newPhotos.length > 0
+            newPhotos.length
         ) {
 
-            const firstPhoto =
-                newPhotos[0];
+            const newCover =
+                newPhotos[0].foto_url;
+
 
             const {
-                error:
-                    coverError
+                error
             } =
                 await supabaseClient
                     .from("albums")
                     .update({
                         cover_url:
-                            firstPhoto.foto_url
+                            newCover
                     })
                     .eq(
                         "id",
                         currentAlbum.id
                     );
 
-            if (!coverError) {
+
+            if (error) {
+
+                console.error(
+                    "UPDATE COVER ERROR:",
+                    error
+                );
+
+            } else {
 
                 currentAlbum.cover_url =
-                    firstPhoto.foto_url;
+                    newCover;
             }
         }
 
-        /*
-            Reload album viewer.
-        */
 
-        await openAlbum(
-            currentAlbum.id
+        renderAlbumViewer(
+            currentAlbum,
+            albumPhotosCache
         );
 
+
         await loadAlbums();
+
 
         alert(
             "Foto berhasil ditambahkan ❤️"
         );
+
 
     } catch (error) {
 
@@ -2274,59 +2420,14 @@ async function addPhotosToCurrentAlbum(
 
     } finally {
 
-        if (event?.target) {
-            event.target.value = "";
-        }
+        event.target.value =
+            "";
     }
 }
 
 
 /* =====================================================
-   29. GET STORAGE PATH FROM PUBLIC URL
-===================================================== */
-
-function getStoragePathFromPublicUrl(
-    url
-) {
-
-    if (!url) {
-        return null;
-    }
-
-    try {
-
-        const marker =
-            `/storage/v1/object/public/${STORAGE_BUCKET}/`;
-
-        const index =
-            url.indexOf(
-                marker
-            );
-
-        if (index === -1) {
-            return null;
-        }
-
-        return decodeURIComponent(
-            url.substring(
-                index + marker.length
-            )
-        );
-
-    } catch (error) {
-
-        console.warn(
-            "GET STORAGE PATH ERROR:",
-            error
-        );
-
-        return null;
-    }
-}
-
-
-/* =====================================================
-   30. DELETE PHOTO
+   29. DELETE PHOTO
 ===================================================== */
 
 async function hapusFotoAlbum(
@@ -2338,52 +2439,54 @@ async function hapusFotoAlbum(
         return;
     }
 
+
     const confirmDelete =
         confirm(
             "Hapus foto ini?"
         );
 
+
     if (!confirmDelete) {
         return;
     }
 
+
     try {
 
         /*
-            Ambil URL foto dari database
-            sebelum dihapus.
+            Ambil data foto terlebih dahulu
+            untuk mendapatkan URL.
         */
 
-        let urlToDelete =
-            photoUrl || "";
+        const {
+            data: photo,
+            error: findError
+        } =
+            await supabaseClient
+                .from(
+                    "album_photos"
+                )
+                .select(
+                    "id,album_id,foto_url"
+                )
+                .eq(
+                    "id",
+                    photoId
+                )
+                .single();
 
-        if (!urlToDelete) {
 
-            const {
-                data:
-                    photoData
-            } =
-                await supabaseClient
-                    .from(
-                        "album_photos"
-                    )
-                    .select(
-                        "foto_url"
-                    )
-                    .eq(
-                        "id",
-                        photoId
-                    )
-                    .single();
+        if (findError) {
 
-            urlToDelete =
-                photoData?.foto_url ||
-                "";
+            throw new Error(
+                findError.message
+            );
         }
 
-        /*
-            Hapus database
-        */
+
+        /* =================================================
+           HAPUS DATABASE
+        ================================================= */
 
         const {
             error:
@@ -2399,6 +2502,7 @@ async function hapusFotoAlbum(
                     photoId
                 );
 
+
         if (deleteError) {
 
             throw new Error(
@@ -2406,17 +2510,20 @@ async function hapusFotoAlbum(
             );
         }
 
-        /*
-            Hapus Storage.
 
-            Path diambil dari URL,
-            bukan dari kolom database.
-        */
+        /* =================================================
+           HAPUS STORAGE
+           
+           Tidak membutuhkan foto_path.
+           Path diambil dari foto_url.
+        ================================================= */
 
         const storagePath =
-            getStoragePathFromPublicUrl(
-                urlToDelete
+            extractStoragePath(
+                photo.foto_url ||
+                photoUrl
             );
+
 
         if (storagePath) {
 
@@ -2433,65 +2540,75 @@ async function hapusFotoAlbum(
                         storagePath
                     ]);
 
+
             if (storageError) {
 
                 console.warn(
-                    "STORAGE DELETE WARNING:",
+                    "Storage delete warning:",
                     storageError
                 );
             }
         }
 
-        /*
-            Ambil foto yang tersisa.
-        */
-
-        const remainingPhotos =
-            await getAlbumPhotos(
-                currentAlbum.id
-            );
 
         /*
             Kalau foto yang dihapus
-            adalah cover, gunakan foto
-            berikutnya sebagai cover.
+            adalah cover album,
+            cari foto berikutnya.
         */
 
-        let newCoverUrl =
-            null;
-
         if (
-            remainingPhotos.length > 0
+            currentAlbum &&
+            currentAlbum.cover_url ===
+            (
+                photo.foto_url ||
+                photoUrl
+            )
         ) {
 
-            newCoverUrl =
-                remainingPhotos[0]
-                    .foto_url;
+            const remainingPhotos =
+                await getAlbumPhotos(
+                    currentAlbum.id
+                );
+
+
+            const newCover =
+                remainingPhotos.length
+                    ?
+                    remainingPhotos[0]
+                        .foto_url
+                    :
+                    null;
+
+
+            await supabaseClient
+                .from("albums")
+                .update({
+                    cover_url:
+                        newCover
+                })
+                .eq(
+                    "id",
+                    currentAlbum.id
+                );
+
+
+            currentAlbum.cover_url =
+                newCover;
         }
 
-        await supabaseClient
-            .from("albums")
-            .update({
-                cover_url:
-                    newCoverUrl
-            })
-            .eq(
-                "id",
-                currentAlbum.id
-            );
-
-        currentAlbum.cover_url =
-            newCoverUrl;
 
         /*
-            Reload viewer.
+            Buka ulang album
         */
 
         await openAlbum(
             currentAlbum.id
         );
 
+
         await loadAlbums();
+
 
     } catch (error) {
 
@@ -2509,7 +2626,7 @@ async function hapusFotoAlbum(
 
 
 /* =====================================================
-   31. DELETE ALBUM
+   30. DELETE ALBUM
 ===================================================== */
 
 async function hapusAlbum(
@@ -2520,14 +2637,17 @@ async function hapusAlbum(
         return;
     }
 
+
     const confirmDelete =
         confirm(
             "Hapus album ini beserta semua fotonya?"
         );
 
+
     if (!confirmDelete) {
         return;
     }
+
 
     try {
 
@@ -2540,26 +2660,25 @@ async function hapusAlbum(
                 albumId
             );
 
-        /*
-            Ambil Storage path dari
-            masing-masing URL.
-        */
+
+        /* =================================================
+           HAPUS FILE STORAGE
+           
+           Path diambil dari foto_url.
+        ================================================= */
 
         const paths =
             photos
                 .map(
                     photo =>
-                        getStoragePathFromPublicUrl(
+                        extractStoragePath(
                             photo.foto_url
                         )
                 )
                 .filter(Boolean);
 
-        /*
-            Hapus Storage.
-        */
 
-        if (paths.length > 0) {
+        if (paths.length) {
 
             const {
                 error:
@@ -2574,6 +2693,7 @@ async function hapusAlbum(
                         paths
                     );
 
+
             if (storageError) {
 
                 console.warn(
@@ -2583,9 +2703,10 @@ async function hapusAlbum(
             }
         }
 
-        /*
-            Hapus foto database.
-        */
+
+        /* =================================================
+           HAPUS PHOTO DATABASE
+        ================================================= */
 
         const {
             error:
@@ -2601,6 +2722,7 @@ async function hapusAlbum(
                     albumId
                 );
 
+
         if (
             photosDeleteError
         ) {
@@ -2610,9 +2732,10 @@ async function hapusAlbum(
             );
         }
 
-        /*
-            Hapus album.
-        */
+
+        /* =================================================
+           HAPUS ALBUM
+        ================================================= */
 
         const {
             error:
@@ -2626,6 +2749,7 @@ async function hapusAlbum(
                     albumId
                 );
 
+
         if (
             albumDeleteError
         ) {
@@ -2635,10 +2759,6 @@ async function hapusAlbum(
             );
         }
 
-        /*
-            Tutup viewer kalau
-            album sedang dibuka.
-        */
 
         if (
             currentAlbum &&
@@ -2649,11 +2769,14 @@ async function hapusAlbum(
             closeAlbumViewer();
         }
 
+
         await loadAlbums();
 
+
         alert(
-            "Album berhasil dihapus."
+            "Album berhasil dihapus ❤️"
         );
+
 
     } catch (error) {
 
@@ -2671,7 +2794,7 @@ async function hapusAlbum(
 
 
 /* =====================================================
-   32. PLAYLIST
+   31. PLAYLIST
 ===================================================== */
 
 function openPlaylist(event) {
@@ -2686,10 +2809,6 @@ function openPlaylist(event) {
         )
         ?.classList
         .remove("hidden");
-
-    document.body.classList.add(
-        "modal-open"
-    );
 }
 
 
@@ -2701,15 +2820,11 @@ function closePlaylist() {
         )
         ?.classList
         .add("hidden");
-
-    document.body.classList.remove(
-        "modal-open"
-    );
 }
 
 
 /* =====================================================
-   33. CLOSE MODALS WITH ESC
+   32. ESCAPE KEY
 ===================================================== */
 
 document.addEventListener(
@@ -2735,27 +2850,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   34. PREVENT MODAL BODY SCROLL
-===================================================== */
-
-document.addEventListener(
-    "click",
-    event => {
-
-        const modal =
-            event.target.closest(
-                ".modal-box"
-            );
-
-        if (modal) {
-            event.stopPropagation();
-        }
-    }
-);
-
-
-/* =====================================================
-   35. OLD HTML COMPATIBILITY
+   33. OLD HTML COMPATIBILITY
 ===================================================== */
 
 function tambahKenangan(
@@ -2769,7 +2864,7 @@ function tambahKenangan(
 
 
 /* =====================================================
-   36. GLOBAL FUNCTIONS
+   34. GLOBAL FUNCTIONS
 ===================================================== */
 
 window.openLoginModal =
@@ -2825,69 +2920,38 @@ window.closePlaylist =
 
 
 /* =====================================================
-   37. INITIALIZATION
+   35. INITIALIZATION
 ===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
     async () => {
 
-        updateAdminUI();
+        try {
 
-        updateTimeTogether();
+            if (
+                !SUPABASE_URL ||
+                !SUPABASE_KEY
+            ) {
 
-        /*
-            Cek konfigurasi.
-        */
-
-        if (
-            !SUPABASE_URL ||
-            !SUPABASE_KEY
-        ) {
-
-            console.error(
-                "Supabase belum dikonfigurasi."
-            );
-
-            const list =
-                document.getElementById(
-                    "timelineList"
+                console.error(
+                    "Supabase belum dikonfigurasi."
                 );
 
-            if (list) {
-
-                list.innerHTML =
-                    `
-                    <div class="empty-state error-state">
-
-                        <strong>
-                            Supabase belum dikonfigurasi
-                        </strong>
-
-                        <p>
-                            Periksa SUPABASE_URL
-                            dan SUPABASE_KEY
-                            di script.js.
-                        </p>
-
-                    </div>
-                    `;
+                return;
             }
 
-            return;
+
+            await checkLogin();
+
+            await loadAlbums();
+
+        } catch (error) {
+
+            console.error(
+                "INITIALIZATION ERROR:",
+                error
+            );
         }
-
-        /*
-            Cek login.
-        */
-
-        await checkLogin();
-
-        /*
-            Load album.
-        */
-
-        await loadAlbums();
-
     }
 );
