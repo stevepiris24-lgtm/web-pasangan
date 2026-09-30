@@ -8,10 +8,20 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    <meta
+        name="description"
+        content="Untuk Lila - Setiap cerita kecil kita tersimpan menjadi kenangan."
+    >
+
     <title>Untuk Lila ❤️</title>
 
-    <!-- Google Fonts -->
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link
         rel="preconnect"
         href="https://fonts.gstatic.com"
@@ -23,14 +33,28 @@
         rel="stylesheet"
     >
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="./style.css">
 
-    <!-- SUPABASE -->
+    <!-- =====================================================
+         CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="./style.css"
+    >
+
+
+    <!-- =====================================================
+         SUPABASE
+    ====================================================== -->
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
 
+
 <body>
+
 
 <!-- =====================================================
      NAVBAR
@@ -40,23 +64,32 @@
 
     <div class="navbar-inner">
 
-        <a href="#" class="logo">
+        <a
+            href="#"
+            class="logo"
+        >
             Untuk Lila <span>♡</span>
         </a>
 
+
         <div class="nav-actions">
 
+            <!-- LOGIN -->
             <button
                 id="adminButton"
                 class="nav-button"
+                type="button"
                 onclick="openLoginModal()"
             >
                 Admin
             </button>
 
+
+            <!-- LOGOUT -->
             <button
                 id="logoutButton"
                 class="nav-button hidden"
+                type="button"
                 onclick="logoutAdmin()"
             >
                 Logout
@@ -69,35 +102,58 @@
 </header>
 
 
+
 <!-- =====================================================
-     HERO
+     MAIN
 ===================================================== -->
 
 <main>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
 
 <section class="hero">
 
     <div class="hero-content">
 
+
         <div class="hero-script">
             Untuk Lila ♡
         </div>
+
 
         <h1 id="heroTitle">
             Setiap hari bersamamu adalah rumah.
         </h1>
 
+
         <p class="hero-date">
+
             Sejak 24 April 2024
+
             —
+
             sudah
-            <span id="daysTogether">0</span>
+
+            <span id="daysTogether">
+                0
+            </span>
+
             hari bersama
-            <span>♥</span>
+
+            <span>
+                ♥
+            </span>
+
         </p>
 
     </div>
 
+
+
+    <!-- HERO PHOTO -->
 
     <div class="hero-photo-wrapper">
 
@@ -107,12 +163,18 @@
                 id="heroPhoto"
                 src="./assets/images/foto.jpg"
                 alt="Foto kita"
-                onerror="this.style.display='none'; document.getElementById('heroPhotoPlaceholder').style.display='flex';"
+                loading="eager"
+                onerror="
+                    this.style.display='none';
+                    document.getElementById('heroPhotoPlaceholder').style.display='flex';
+                "
             >
+
 
             <div
                 id="heroPhotoPlaceholder"
                 class="hero-photo-placeholder"
+                style="display:none;"
             >
                 ❤️
             </div>
@@ -124,11 +186,15 @@
 </section>
 
 
+
 <!-- =====================================================
      INFO CARDS
 ===================================================== -->
 
 <section class="info-grid">
+
+
+    <!-- JAM TERBANG -->
 
     <div class="info-card">
 
@@ -136,15 +202,24 @@
             ⏳
         </div>
 
+
         <h3>
             Jam Terbang
         </h3>
 
+
         <p>
-            <span id="hoursTogether">0</span>
+
+            <span id="hoursTogether">
+                0
+            </span>
+
             jam bersama
+
             ⏳
+
         </p>
+
 
         <small>
             Sejak kita bersama
@@ -153,19 +228,25 @@
     </div>
 
 
+
+    <!-- PLAYLIST -->
+
     <div class="info-card">
 
         <div class="info-icon">
             🎵
         </div>
 
+
         <h3>
             Playlist
         </h3>
 
+
         <p>
             Lagu-lagu kita
         </p>
+
 
         <a
             href="#"
@@ -177,11 +258,15 @@
     </div>
 
 
+
+    <!-- QUOTE -->
+
     <div class="info-card quote-card">
 
         <div class="quote-icon">
             “
         </div>
+
 
         <p>
             Setiap hari bersamamu adalah rumah.
@@ -192,13 +277,16 @@
 </section>
 
 
+
 <!-- =====================================================
      TIMELINE
 ===================================================== -->
 
 <section class="timeline-section">
 
+
     <div class="section-heading">
+
 
         <div>
 
@@ -206,9 +294,11 @@
                 OUR STORY
             </span>
 
+
             <h2>
                 Timeline Cerita Kita
             </h2>
+
 
             <p>
                 Setiap cerita kecil kita,
@@ -218,9 +308,14 @@
         </div>
 
 
+
+        <!-- BUTTON TAMBAH ALBUM
+             HANYA MUNCUL UNTUK ADMIN -->
+
         <button
             id="addAlbumButton"
             class="primary-button hidden"
+            type="button"
             onclick="openAddAlbumModal()"
         >
             + Tambah Album
@@ -229,7 +324,13 @@
     </div>
 
 
-    <div id="timelineList" class="timeline-list">
+
+    <!-- TIMELINE DATA DARI SUPABASE -->
+
+    <div
+        id="timelineList"
+        class="timeline-list"
+    >
 
         <div class="loading">
             Memuat cerita kita...
@@ -242,6 +343,7 @@
 </main>
 
 
+
 <!-- =====================================================
      LOGIN MODAL
 ===================================================== -->
@@ -251,16 +353,35 @@
     class="modal hidden"
 >
 
-    <div class="modal-overlay" onclick="closeLoginModal()"></div>
+
+    <!-- OVERLAY -->
+
+    <div
+        class="modal-overlay"
+        onclick="closeLoginModal()"
+    ></div>
+
+
+
+    <!-- MODAL BOX -->
 
     <div class="modal-box small-modal">
 
+
+        <!-- CLOSE -->
+
         <button
             class="modal-close"
+            type="button"
+            aria-label="Tutup"
             onclick="closeLoginModal()"
         >
             ×
         </button>
+
+
+
+        <!-- HEADER -->
 
         <div class="modal-header">
 
@@ -268,9 +389,11 @@
                 🔐
             </span>
 
+
             <h2>
                 Admin
             </h2>
+
 
             <p>
                 Masuk untuk mengelola album.
@@ -279,47 +402,73 @@
         </div>
 
 
-        <form onsubmit="loginAdmin(event)">
+
+        <!-- LOGIN FORM -->
+
+        <form
+            id="loginForm"
+            onsubmit="loginAdmin(event)"
+        >
+
+
+            <!-- EMAIL -->
 
             <div class="form-group">
 
-                <label>
+                <label for="loginEmail">
                     Email
                 </label>
 
+
                 <input
                     id="loginEmail"
+                    name="email"
                     type="email"
                     placeholder="email@example.com"
+                    autocomplete="username"
                     required
                 >
 
             </div>
 
+
+
+            <!-- PASSWORD -->
 
             <div class="form-group">
 
-                <label>
+                <label for="loginPassword">
                     Password
                 </label>
 
+
                 <input
                     id="loginPassword"
+                    name="password"
                     type="password"
                     placeholder="••••••••"
+                    autocomplete="current-password"
                     required
                 >
 
             </div>
 
+
+
+            <!-- LOGIN MESSAGE -->
 
             <div
                 id="loginMessage"
                 class="form-message"
+                role="alert"
             ></div>
 
 
+
+            <!-- LOGIN BUTTON -->
+
             <button
+                id="loginSubmitButton"
                 type="submit"
                 class="primary-button full-button"
             >
@@ -333,6 +482,7 @@
 </div>
 
 
+
 <!-- =====================================================
      ADD ALBUM MODAL
 ===================================================== -->
@@ -342,20 +492,35 @@
     class="modal hidden"
 >
 
+
+    <!-- OVERLAY -->
+
     <div
         class="modal-overlay"
         onclick="closeAddAlbumModal()"
     ></div>
 
+
+
+    <!-- MODAL BOX -->
+
     <div class="modal-box large-modal">
+
+
+        <!-- CLOSE -->
 
         <button
             class="modal-close"
+            type="button"
+            aria-label="Tutup"
             onclick="closeAddAlbumModal()"
         >
             ×
         </button>
 
+
+
+        <!-- HEADER -->
 
         <div class="modal-header">
 
@@ -363,9 +528,11 @@
                 💗
             </span>
 
+
             <h2>
                 Buat Album Baru
             </h2>
+
 
             <p>
                 Buat satu album untuk menyimpan
@@ -375,69 +542,126 @@
         </div>
 
 
+
+        <!-- =================================================
+             ALBUM FORM
+        ================================================== -->
+
         <form
             id="albumForm"
             onsubmit="tambahAlbum(event)"
+            autocomplete="off"
         >
+
 
             <div class="form-grid">
 
+
+                <!-- =========================================
+                     NAMA ALBUM
+                ========================================== -->
+
                 <div class="form-group">
 
-                    <label>
+                    <label for="albumTitle">
                         Nama Album
                     </label>
 
+
                     <input
                         id="albumTitle"
+                        name="title"
                         type="text"
                         placeholder="Contoh: Hari Pertama Kita"
+                        autocomplete="off"
+                        maxlength="150"
                         required
                     >
 
                 </div>
 
 
+
+                <!-- =========================================
+                     TANGGAL
+                ========================================== -->
+
                 <div class="form-group">
 
-                    <label>
+                    <label for="albumDate">
                         Tanggal
                     </label>
 
+
+                    <!--
+                        PENTING:
+                        Database Supabase menggunakan kolom:
+
+                        date
+
+                        Nilai dari input type=date akan
+                        dikirim dalam format:
+
+                        YYYY-MM-DD
+
+                        Contoh:
+
+                        2026-09-30
+                    -->
+
                     <input
                         id="albumDate"
+                        name="date"
                         type="date"
+                        autocomplete="off"
                         required
                     >
 
                 </div>
 
 
+
+                <!-- =========================================
+                     LOKASI
+                ========================================== -->
+
                 <div class="form-group">
 
-                    <label>
+                    <label for="albumLocation">
                         Lokasi
                     </label>
 
+
                     <input
                         id="albumLocation"
+                        name="location"
                         type="text"
                         placeholder="Contoh: Ambon"
+                        autocomplete="off"
+                        maxlength="200"
                     >
 
                 </div>
 
 
+
+                <!-- =========================================
+                     CERITA
+                ========================================== -->
+
                 <div class="form-group">
 
-                    <label>
+                    <label for="albumStory">
                         Cerita Album
                     </label>
 
+
                     <textarea
                         id="albumStory"
+                        name="story"
                         rows="4"
                         placeholder="Ceritakan kenangan ini..."
+                        maxlength="5000"
                     ></textarea>
 
                 </div>
@@ -445,18 +669,26 @@
             </div>
 
 
+
+            <!-- =============================================
+                 FOTO ALBUM
+            ============================================== -->
+
             <div class="form-group">
 
-                <label>
+                <label for="albumPhotos">
                     Foto Album
                 </label>
 
+
                 <input
                     id="albumPhotos"
+                    name="photos"
                     type="file"
-                    accept="image/*"
+                    accept="image/jpeg,image/png,image/webp,image/gif"
                     multiple
                 >
+
 
                 <small class="input-help">
                     Foto pertama akan digunakan sebagai cover album.
@@ -465,19 +697,38 @@
             </div>
 
 
+
+            <!-- =============================================
+                 PHOTO PREVIEW
+            ============================================== -->
+
             <div
                 id="albumPreview"
                 class="photo-preview"
             ></div>
 
 
+
+            <!-- =============================================
+                 MESSAGE
+            ============================================== -->
+
             <div
                 id="albumMessage"
                 class="form-message"
+                role="alert"
             ></div>
 
 
+
+            <!-- =============================================
+                 MODAL ACTIONS
+            ============================================== -->
+
             <div class="modal-actions">
+
+
+                <!-- BATAL -->
 
                 <button
                     type="button"
@@ -486,6 +737,10 @@
                 >
                     Batal
                 </button>
+
+
+
+                <!-- SIMPAN -->
 
                 <button
                     type="submit"
@@ -504,6 +759,7 @@
 </div>
 
 
+
 <!-- =====================================================
      ALBUM VIEWER
 ===================================================== -->
@@ -513,20 +769,35 @@
     class="modal hidden"
 >
 
+
+    <!-- OVERLAY -->
+
     <div
         class="modal-overlay"
         onclick="closeAlbumViewer()"
     ></div>
 
+
+
+    <!-- VIEWER -->
+
     <div class="modal-box album-modal">
+
+
+        <!-- CLOSE -->
 
         <button
             class="modal-close"
+            type="button"
+            aria-label="Tutup"
             onclick="closeAlbumViewer()"
         >
             ×
         </button>
 
+
+
+        <!-- CONTENT -->
 
         <div
             id="albumViewerContent"
@@ -538,6 +809,7 @@
 </div>
 
 
+
 <!-- =====================================================
      PLAYLIST MODAL
 ===================================================== -->
@@ -547,19 +819,35 @@
     class="modal hidden"
 >
 
+
+    <!-- OVERLAY -->
+
     <div
         class="modal-overlay"
         onclick="closePlaylist()"
     ></div>
 
+
+
+    <!-- MODAL -->
+
     <div class="modal-box small-modal">
+
+
+        <!-- CLOSE -->
 
         <button
             class="modal-close"
+            type="button"
+            aria-label="Tutup"
             onclick="closePlaylist()"
         >
             ×
         </button>
+
+
+
+        <!-- HEADER -->
 
         <div class="modal-header">
 
@@ -567,9 +855,11 @@
                 🎵
             </span>
 
+
             <h2>
                 Playlist Kita
             </h2>
+
 
             <p>
                 Lagu-lagu yang mengingatkan
@@ -579,31 +869,56 @@
         </div>
 
 
+
+        <!-- PLAYLIST -->
+
         <div class="playlist-list">
 
+
             <div class="playlist-item">
-                <span>🎧</span>
+
+                <span>
+                    🎧
+                </span>
+
+
                 <div>
+
                     <strong>
                         Lagu Kita
                     </strong>
+
+
                     <small>
                         Kenangan kita
                     </small>
+
                 </div>
+
             </div>
 
 
+
             <div class="playlist-item">
-                <span>❤️</span>
+
+                <span>
+                    ❤️
+                </span>
+
+
                 <div>
+
                     <strong>
                         Our Song
                     </strong>
+
+
                     <small>
                         Untuk Lila
                     </small>
+
                 </div>
+
             </div>
 
         </div>
@@ -613,11 +928,13 @@
 </div>
 
 
+
 <!-- =====================================================
      JAVASCRIPT
 ===================================================== -->
 
 <script src="./script.js"></script>
+
 
 </body>
 </html>
